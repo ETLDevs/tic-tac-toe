@@ -2,6 +2,10 @@ const game = {
     xTurn: true,
     xState: [],
     oState: [],
+    games : {
+    
+    },
+    
     winningStates: [
         // Rows
         ['0', '1', '2'],
