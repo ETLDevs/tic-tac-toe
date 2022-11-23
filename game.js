@@ -1,3 +1,5 @@
+let cellValue;
+
 const game = {
     xTurn: true,
     xState: [],
@@ -25,7 +27,7 @@ document.addEventListener('click', event => {
     const isDisabled = target.classList.contains('disabled')
 
     if (isCell && !isDisabled) {
-        const cellValue = target.dataset.value
+    cellValue = target.dataset.value
 
         game.xTurn === true
             ? game.xState.push(cellValue)
@@ -67,6 +69,7 @@ document.querySelector('.restart').addEventListener('click', () => {
     game.xState = []
     game.oState = []
 })
+
 
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
     document.querySelector('.game-over').classList.remove('visible')
