@@ -119,6 +119,7 @@ game.xState.map((state) =>{
 cell.classList.add('x');
     }
 })
+game.savedGame = [];
     })
 
 document.querySelectorAll('.grid-cell').forEach(function(cell){
