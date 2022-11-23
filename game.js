@@ -66,10 +66,12 @@ document.querySelector('.restart').addEventListener('click', () => {
     game.oState = []
 })
 
-document.querySelector('.return-one-step').addEventListener('click', () => {   
-    const lastXCell = document.querySelector(`[data-value = '${game.xState[game.xState.length -1]}']`)
-    const lastOCell = document.querySelector(`[data-value = '${game.oState[game.oState.length -1]}']`)
-    
+document.querySelector('.return-one-step').addEventListener('click', () => {  
+    let xLength = game.xState.length;
+    let oLength = game.oState.length;
+    const lastXCell = document.querySelector(`[data-value = '${game.xState[xLength -1]}']`)
+    const lastOCell = document.querySelector(`[data-value = '${game.oState[oLength -1]}']`)
+ if (xLength > 0){
     if (game.xTurn) { 
      lastOCell.classList.remove('o', 'disabled');
      game.oState.pop();
@@ -79,7 +81,7 @@ document.querySelector('.return-one-step').addEventListener('click', () => {
      lastXCell.classList.remove('x', 'disabled');
      game.xState.pop();
      game.xTurn = true;
- }
+ }}
  })
 
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
