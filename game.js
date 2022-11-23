@@ -2,8 +2,9 @@ const game = {
     xTurn: true,
     xState: [],
     oState: [],
-    savedGame:[],
-    gamesCounter: 1,
+    savedGame:{states: [],
+    xTurn: true},
+    gamesCounter: 0,
     winnings : {
     
     },
@@ -29,8 +30,10 @@ document.addEventListener('click', event => {
     const target = event.target
     const isCell = target.classList.contains('grid-cell')
     const isDisabled = target.classList.contains('disabled')
+
     if (isCell && !isDisabled) {
     const cellValue = target.dataset.value
+
         game.xTurn === true
             ? game.xState.push(cellValue)
             : game.oState.push(cellValue)
@@ -44,6 +47,7 @@ document.addEventListener('click', event => {
         if (!document.querySelectorAll('.grid-cell:not(.disabled)').length) {
             document.querySelector('.game-over').classList.add('visible')
             document.querySelector('.game-over-text').textContent = 'Draw!'
+            game.gamesCounter++;
         }
 
         game.winningStates.forEach(winningState => {
@@ -56,7 +60,8 @@ document.addEventListener('click', event => {
                 document.querySelector('.game-over-text').textContent = xWins
                     ? 'X wins!'
                     : 'O wins!';
-                game.winnings[game.gamesCounter++] = game.xState.length + game.oState.length;
+                game.gamesCounter++;
+                game.winnings[game.gamesCounter] = game.xState.length + game.oState.length;
 
             }
         })
@@ -75,8 +80,8 @@ document.querySelector('.restart').addEventListener('click', () => {
 })
 
 document.querySelector('.return-one-step').addEventListener('click', () => {  
-    let xLength = game.xState.length;
-    let oLength = game.oState.length;
+    const xLength = game.xState.length;
+    const oLength = game.oState.length;
     const lastXCell = document.querySelector(`[data-value = '${game.xState[xLength -1]}']`)
     const lastOCell = document.querySelector(`[data-value = '${game.oState[oLength -1]}']`)
  if (xLength > 0){
@@ -94,42 +99,59 @@ document.querySelector('.return-one-step').addEventListener('click', () => {
 
  document.querySelector('.show-record').addEventListener('click', () => {
  const scoresArr = [];
-if (scoresArr.length > 0){
+
  for (const score in game.winnings) {
   scoresArr.push([score, game.winnings[score]]);
  }
+ if (scoresArr.length > 0){
 scoresArr.sort((a , b) =>  a[1] - b[1])
 alert(`The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`);
+}
+else {
+    alert("No winnings yet")
 }
 })
 
 document.querySelector('.save-game').addEventListener('click', function(){
-    if(game.xState.length > 0){
-        game.savedGame.push(game.xState,game.oState)
+   if(game.xState.length){
+        game.savedGame.states.push(game.xState, game.oState);
+        game.savedGame.xTurn = game.xTurn;
        this.disabled = true;
+    }
+    else{
+        alert("The board still empty")
     }
 })
 
 document.querySelector('.load-game').addEventListener('click', () =>{
-    game.xState = game.savedGame[0];
-    game.oState = game.savedGame[1];
-    document.querySelectorAll('.grid-cell').forEach(function(cell){
-game.xState.map((state) =>{
+if(game.savedGame.states.length > 0){
+        game.xState = game.savedGame.states[0];
+        game.oState = game.savedGame.states[1];
+
+ document.querySelectorAll('.grid-cell').forEach(function(cell){
+
+return game.xState.map((state) =>{
     if(cell.dataset.value === state){
 cell.classList.add('x');
     }
-})
-game.savedGame = [];
-    })
+else{
+    cell.classList.remove('x');
+}
+});
+});
 
 document.querySelectorAll('.grid-cell').forEach(function(cell){
-        game.oState.map((state) =>{
+      return game.oState.map((state) =>{
             if(cell.dataset.value === state){
         cell.classList.add('o');
             }
+            else{
+                cell.classList.remove('o');
+            }
         })
             })
-
+            game.xTurn = game.savedGame.xTurn;
+        }
             document.querySelector('.save-game').disabled = false;   
 })
 
