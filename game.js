@@ -103,6 +103,13 @@ alert(`The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} move
 }
 })
 
+document.querySelector('.save-game').addEventListener('click', function(){
+    if(game.xState.length > 0){
+        game.savedGame.push(game.xState,game.oState)
+       this.disabled = true;
+    }
+})
+
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
     document.querySelector('.game-over').classList.remove('visible')
     document.querySelectorAll('.grid-cell').forEach(cell => {
