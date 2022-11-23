@@ -91,6 +91,11 @@ document.querySelector('.return-one-step').addEventListener('click', () => {
  }}
  })
 
+ document.querySelector('.show-record').addEventListener('click', () => {
+    
+    
+ })
+
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
     document.querySelector('.game-over').classList.remove('visible')
     document.querySelectorAll('.grid-cell').forEach(cell => {
