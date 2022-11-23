@@ -92,9 +92,15 @@ document.querySelector('.return-one-step').addEventListener('click', () => {
  })
 
  document.querySelector('.show-record').addEventListener('click', () => {
-    
-    
- })
+ const scoresArr = [];
+if (scoresArr.length > 0){
+ for (const score in game.winnings) {
+  scoresArr.push([score, game.winnings[score]]);
+ }
+scoresArr.sort((a , b) =>  a[1] - b[1])
+alert(`The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`);
+}
+})
 
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
     document.querySelector('.game-over').classList.remove('visible')
