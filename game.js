@@ -2,6 +2,7 @@ const game = {
     xTurn: true,
     xState: [],
     oState: [],
+    savedGame:[],
     gamesCounter: 1,
     winnings : {
     
