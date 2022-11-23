@@ -2,10 +2,11 @@ const game = {
     xTurn: true,
     xState: [],
     oState: [],
-    games : {
+    gamesCounter: 1,
+    winnings : {
     
     },
-    
+
     winningStates: [
         // Rows
         ['0', '1', '2'],
@@ -53,7 +54,9 @@ document.addEventListener('click', event => {
                 document.querySelector('.game-over').classList.add('visible')
                 document.querySelector('.game-over-text').textContent = xWins
                     ? 'X wins!'
-                    : 'O wins!'
+                    : 'O wins!';
+                game.winnings[game.gamesCounter++] = game.xState.length + game.oState.length;
+
             }
         })
     }
