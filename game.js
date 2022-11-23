@@ -110,6 +110,28 @@ document.querySelector('.save-game').addEventListener('click', function(){
     }
 })
 
+document.querySelector('.load-game').addEventListener('click', () =>{
+    game.xState = game.savedGame[0];
+    game.oState = game.savedGame[1];
+    document.querySelectorAll('.grid-cell').forEach(function(cell){
+game.xState.map((state) =>{
+    if(cell.dataset.value === state){
+cell.classList.add('x');
+    }
+})
+    })
+
+document.querySelectorAll('.grid-cell').forEach(function(cell){
+        game.oState.map((state) =>{
+            if(cell.dataset.value === state){
+        cell.classList.add('o');
+            }
+        })
+            })
+
+            document.querySelector('.save-game').disabled = false;   
+})
+
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
     document.querySelector('.game-over').classList.remove('visible')
     document.querySelectorAll('.grid-cell').forEach(cell => {
