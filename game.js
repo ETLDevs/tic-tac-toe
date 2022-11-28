@@ -93,10 +93,10 @@ document.querySelector('.return-one-step').addEventListener('click', () => {
     const lastOCell = document.querySelector(`[data-value = '${game.oState[oLength -1]}']`)
  if (xLength > 0){
     if (game.xTurn) { 
-        oneStepBack(lastOCell,'o', oState, xTurn = false)    
+        oneStepBack(lastOCell,'o', oState, game.xTurn = false)    
  }
  else{
-    oneStepBack(lastXCell,'x', xState, xTurn = true)    
+    oneStepBack(lastXCell,'x', xState, game.xTurn = true)    
  }}
  })
 
@@ -150,7 +150,10 @@ game.oState.map((state) =>{
         })
             })
             game.xTurn = game.savedGame.xTurn;
-        }   
+        }  
+        else {
+            alert('No saved game')
+        } 
 })
 
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
