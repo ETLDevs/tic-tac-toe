@@ -1,8 +1,10 @@
+"use strict";
 const game = {
     xTurn: true,
     xState: [],
     oState: [],
-    savedGame:[],
+    savedGame:{states:[],
+    xTurn: true},
     gamesCounter: 1,
     winnings : {
     
@@ -36,8 +38,10 @@ document.addEventListener('click', event => {
     const target = event.target
     const isCell = target.classList.contains('grid-cell')
     const isDisabled = target.classList.contains('disabled')
+
     if (isCell && !isDisabled) {
     const cellValue = target.dataset.value
+
         game.xTurn === true
             ? game.xState.push(cellValue)
             : game.oState.push(cellValue)
@@ -63,7 +67,7 @@ document.addEventListener('click', event => {
                 document.querySelector('.game-over-text').textContent = xWins
                     ? 'X wins!'
                     : 'O wins!';
-                game.winnings[game.gamesCounter++] = game.xState.length + game.oState.length;
+                game.winnings[game.gamesCounter] = game.xState.length + game.oState.length;
 
             }
         })
@@ -71,7 +75,6 @@ document.addEventListener('click', event => {
 })
 
 document.querySelector('.restart').addEventListener('click', () => {
-    document.querySelector('.game-over').classList.remove('visible')
     document.querySelectorAll('.grid-cell').forEach(cell => {
         cell.classList.remove('disabled', 'x', 'o')
     })
@@ -99,20 +102,55 @@ document.querySelector('.return-one-step').addEventListener('click', () => {
 
  document.querySelector('.show-record').addEventListener('click', () => {
  const scoresArr = [];
-if (scoresArr.length > 0){
+
  for (const score in game.winnings) {
   scoresArr.push([score, game.winnings[score]]);
  }
+ if (scoresArr.length > 0){
 scoresArr.sort((a , b) =>  a[1] - b[1])
 alert(`The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`);
+}
+else {
+    alert("No winnings yet")
 }
 })
 
 document.querySelector('.save-game').addEventListener('click', function(){
-    if(game.xState.length > 0){
-        game.savedGame.push(game.xState,game.oState)
-       this.disabled = true;
+   if(game.xState.length > 0){
+        game.savedGame.states = [game.xState, game.oState]
+        game.savedGame.xTurn = game.xTurn;
     }
+    else{
+        alert("The board still empty")
+    }
+})
+
+document.querySelector('.load-game').addEventListener('click', () =>{
+if(game.savedGame.states.length > 0){
+    document.querySelectorAll('.grid-cell').forEach(cell => {
+        cell.classList.remove('disabled', 'x', 'o')
+    })
+    game.xState = game.savedGame.states[0];
+    game.oState = game.savedGame.states[1];
+
+ document.querySelectorAll('.grid-cell').forEach(function(cell){
+
+game.xState.map((state) =>{
+    if(cell.dataset.value === state){
+cell.classList.add('x');
+    }
+});
+});
+
+document.querySelectorAll('.grid-cell').forEach(function(cell){
+game.oState.map((state) =>{
+            if(cell.dataset.value === state){
+        cell.classList.add('o');
+            }
+        })
+            })
+            game.xTurn = game.savedGame.xTurn;
+        }   
 })
 
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
@@ -120,7 +158,7 @@ document.querySelector('.restart-after-gameover').addEventListener('click', () =
     document.querySelectorAll('.grid-cell').forEach(cell => {
         cell.classList.remove('disabled', 'x', 'o')
     })
-
+    game.gamesCounter++;
     game.xTurn = true
     game.xState = []
     game.oState = []
