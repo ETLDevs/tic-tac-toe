@@ -24,6 +24,13 @@ const game = {
     ]
 }
 
+const oneStepBack = (lastCell, player, state, xTurn) => {
+    lastCell.classList.remove(`${player}`, 'disabled');
+    state.pop();
+   game.xTurn = xTurn;
+
+}
+
 document.addEventListener('click', event => {
     const target = event.target
     const isCell = target.classList.contains('grid-cell')
@@ -76,18 +83,16 @@ document.querySelector('.restart').addEventListener('click', () => {
 document.querySelector('.return-one-step').addEventListener('click', () => {  
     let xLength = game.xState.length;
     let oLength = game.oState.length;
+    const oState = game.oState;
+    const xState = game.xState;
     const lastXCell = document.querySelector(`[data-value = '${game.xState[xLength -1]}']`)
     const lastOCell = document.querySelector(`[data-value = '${game.oState[oLength -1]}']`)
  if (xLength > 0){
     if (game.xTurn) { 
-     lastOCell.classList.remove('o', 'disabled');
-     game.oState.pop();
-    game.xTurn = false;
+        oneStepBack(lastOCell,'o', oState, xTurn = false)    
  }
  else{
-     lastXCell.classList.remove('x', 'disabled');
-     game.xState.pop();
-     game.xTurn = true;
+    oneStepBack(lastXCell,'x', xState, xTurn = true)    
  }}
  })
 
