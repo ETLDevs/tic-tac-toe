@@ -1,8 +1,9 @@
+"use strict";
 const game = {
     xTurn: true,
     xState: [],
     oState: [],
-    savedGame:{states: [],
+    savedGame:{states:[],
     xTurn: true},
     gamesCounter: 0,
     winnings : {
@@ -69,7 +70,6 @@ document.addEventListener('click', event => {
 })
 
 document.querySelector('.restart').addEventListener('click', () => {
-    document.querySelector('.game-over').classList.remove('visible')
     document.querySelectorAll('.grid-cell').forEach(cell => {
         cell.classList.remove('disabled', 'x', 'o')
     })
@@ -113,10 +113,9 @@ else {
 })
 
 document.querySelector('.save-game').addEventListener('click', function(){
-   if(game.xState.length){
-        game.savedGame.states.push(game.xState, game.oState);
+   if(game.xState.length > 0){
+        game.savedGame.states = [game.xState, game.oState]
         game.savedGame.xTurn = game.xTurn;
-       this.disabled = true;
     }
     else{
         alert("The board still empty")
@@ -125,8 +124,11 @@ document.querySelector('.save-game').addEventListener('click', function(){
 
 document.querySelector('.load-game').addEventListener('click', () =>{
 if(game.savedGame.states.length > 0){
-        game.xState = game.savedGame.states[0];
-        game.oState = game.savedGame.states[1];
+    document.querySelectorAll('.grid-cell').forEach(cell => {
+        cell.classList.remove('disabled', 'x', 'o')
+    })
+    game.xState = game.savedGame.states[0];
+    game.oState = game.savedGame.states[1];
 
  document.querySelectorAll('.grid-cell').forEach(function(cell){
 
@@ -134,9 +136,6 @@ return game.xState.map((state) =>{
     if(cell.dataset.value === state){
 cell.classList.add('x');
     }
-else{
-    cell.classList.remove('x');
-}
 });
 });
 
@@ -144,9 +143,6 @@ document.querySelectorAll('.grid-cell').forEach(function(cell){
       return game.oState.map((state) =>{
             if(cell.dataset.value === state){
         cell.classList.add('o');
-            }
-            else{
-                cell.classList.remove('o');
             }
         })
             })
