@@ -5,7 +5,7 @@ const game = {
     oState: [],
     savedGame:{states:[],
     xTurn: true},
-    gamesCounter: 0,
+    gamesCounter: 1,
     winnings : {
     
     },
@@ -48,7 +48,6 @@ document.addEventListener('click', event => {
         if (!document.querySelectorAll('.grid-cell:not(.disabled)').length) {
             document.querySelector('.game-over').classList.add('visible')
             document.querySelector('.game-over-text').textContent = 'Draw!'
-            game.gamesCounter++;
         }
 
         game.winningStates.forEach(winningState => {
@@ -61,7 +60,6 @@ document.addEventListener('click', event => {
                 document.querySelector('.game-over-text').textContent = xWins
                     ? 'X wins!'
                     : 'O wins!';
-                game.gamesCounter++;
                 game.winnings[game.gamesCounter] = game.xState.length + game.oState.length;
 
             }
@@ -156,7 +154,7 @@ document.querySelector('.restart-after-gameover').addEventListener('click', () =
     document.querySelectorAll('.grid-cell').forEach(cell => {
         cell.classList.remove('disabled', 'x', 'o')
     })
-
+    game.gamesCounter++;
     game.xTurn = true
     game.xState = []
     game.oState = []
