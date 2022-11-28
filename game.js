@@ -2,6 +2,7 @@ const game = {
     xTurn: true,
     xState: [],
     oState: [],
+    savedGame:[],
     gamesCounter: 1,
     winnings : {
     
@@ -105,6 +106,13 @@ if (scoresArr.length > 0){
 scoresArr.sort((a , b) =>  a[1] - b[1])
 alert(`The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`);
 }
+})
+
+document.querySelector('.save-game').addEventListener('click', function(){
+    if(game.xState.length > 0){
+        game.savedGame.push(game.xState,game.oState)
+       this.disabled = true;
+    }
 })
 
 document.querySelector('.restart-after-gameover').addEventListener('click', () => {
