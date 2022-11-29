@@ -132,23 +132,13 @@ if(game.savedGame.states.length > 0){
     game.oState = game.savedGame.states[1];
 
  document.querySelectorAll('.grid-cell').forEach(function(cell){
-
-game.xState.map((state) =>{
-    if(cell.dataset.value === state){
+if(game.xState.includes(cell.dataset.value))
 cell.classList.add('x');
+if(game.oState.includes(cell.dataset.value))
+    cell.classList.add('o');
+    });
+            game.xTurn = game.savedGame.xTurn; 
     }
-});
-});
-
-document.querySelectorAll('.grid-cell').forEach(function(cell){
-game.oState.map((state) =>{
-            if(cell.dataset.value === state){
-        cell.classList.add('o');
-            }
-        })
-            })
-            game.xTurn = game.savedGame.xTurn;
-        }  
         else {
             alert('No saved game')
         } 
