@@ -1,10 +1,19 @@
-.game {
+#game-3x3 {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: grid;
     grid-template-columns: repeat(3, auto);
+}
+
+#game-5x5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(5, auto);
 }
 
 .grid-cell {
@@ -71,4 +80,8 @@
 
 .visible {
     display: block;
+}
+
+.hidden{
+    display: none
 }
