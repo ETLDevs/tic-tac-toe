@@ -3,7 +3,7 @@ const game = {
     xTurn: true,
     xState: [],
     oState: [],
-    savedGame:{states:[],
+    savedGame:{states:[[],[]],
     xTurn: true},
     gamesCounter: 1,
     winnings : {
@@ -31,7 +31,12 @@ const oneStepBack = (lastCell, player, state, xTurn) => {
     lastCell.classList.remove(`${player}`, 'disabled');
     state.pop();
    game.xTurn = xTurn;
+}
 
+const saveStates = (playerState, savedState) => {
+    playerState.map((state)=>{
+        savedState.push(state)   
+     });
 }
 
 document.addEventListener('click', event => {
@@ -74,16 +79,6 @@ document.addEventListener('click', event => {
     }
 })
 
-document.querySelector('.restart').addEventListener('click', () => {
-    document.querySelectorAll('.grid-cell').forEach(cell => {
-        cell.classList.remove('disabled', 'x', 'o')
-    })
-
-    game.xTurn = true
-    game.xState = []
-    game.oState = []
-})
-
 document.querySelector('.return-one-step').addEventListener('click', () => {  
     let xLength = game.xState.length;
     let oLength = game.oState.length;
@@ -116,13 +111,16 @@ else {
 })
 
 document.querySelector('.save-game').addEventListener('click', function(){
+    game.savedGame.states = [[],[]]
    if(game.xState.length > 0){
-        game.savedGame.states = [game.xState, game.oState]
-        game.savedGame.xTurn = game.xTurn;
-    }
+saveStates(game.xState, game.savedGame.states[0])
+   }
+   if(game.xState.length > 0){
+saveStates(game.oState, game.savedGame.states[1]);}   
     else{
         alert("The board still empty")
     }
+    game.savedGame.xTurn = game.xTurn;
 })
 
 document.querySelector('.load-game').addEventListener('click', () =>{
@@ -156,12 +154,14 @@ game.oState.map((state) =>{
         } 
 })
 
-document.querySelector('.restart-after-gameover').addEventListener('click', () => {
+document.querySelector('.restart').addEventListener('click', () => {
+    if (document.querySelector('.game-over').classList.contains('visible')){
     document.querySelector('.game-over').classList.remove('visible')
+    game.gamesCounter++;}
+
     document.querySelectorAll('.grid-cell').forEach(cell => {
         cell.classList.remove('disabled', 'x', 'o')
     })
-    game.gamesCounter++;
     game.xTurn = true
     game.xState = []
     game.oState = []
