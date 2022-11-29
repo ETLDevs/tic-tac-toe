@@ -111,11 +111,11 @@ else {
 })
 
 document.querySelector('.save-game').addEventListener('click', function(){
-    game.savedGame.states = [[],[]]
+    game.savedGame.states = [[],[]];
    if(game.xState.length > 0){
 saveStates(game.xState, game.savedGame.states[0])
    }
-   if(game.xState.length > 0){
+   if(game.oState.length > 0){
 saveStates(game.oState, game.savedGame.states[1]);}   
     else{
         alert("The board still empty")
@@ -127,16 +127,13 @@ document.querySelector('.load-game').addEventListener('click', () =>{
 if(game.savedGame.states.length > 0){
     document.querySelectorAll('.grid-cell').forEach(cell => {
         cell.classList.remove('disabled', 'x', 'o')
-    })
-    game.xState = game.savedGame.states[0];
+        game.xState = game.savedGame.states[0];
     game.oState = game.savedGame.states[1];
-
- document.querySelectorAll('.grid-cell').forEach(function(cell){
-if(game.xState.includes(cell.dataset.value))
+        if(game.xState.includes(cell.dataset.value))
 cell.classList.add('x');
 if(game.oState.includes(cell.dataset.value))
     cell.classList.add('o');
-    });
+    })
             game.xTurn = game.savedGame.xTurn; 
     }
         else {
