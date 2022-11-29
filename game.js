@@ -154,7 +154,8 @@ game.oState.map((state) =>{
         } 
 })
 
-document.querySelector('.restart').addEventListener('click', () => {
+document.querySelectorAll('.restart').forEach((btn)=>{
+    btn.addEventListener('click', () => {
     if (document.querySelector('.game-over').classList.contains('visible')){
     document.querySelector('.game-over').classList.remove('visible')
     game.gamesCounter++;}
@@ -165,4 +166,4 @@ document.querySelector('.restart').addEventListener('click', () => {
     game.xTurn = true
     game.xState = []
     game.oState = []
-})
+})})
