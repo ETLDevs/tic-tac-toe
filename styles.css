@@ -31,34 +31,34 @@
     background: #eee;
 }
 
-.grid-cell~.game-3x3:nth-child(-n + 3) {
+.game-3x3>.grid-cell:nth-child(-n + 3) {
     border-top: none;
 }
 
-.grid-cell~.game-3x3:nth-child(3n + 1) {
-    border-left: none;
+.game-3x3>.grid-cell:nth-child(3n + 1) {
+  border-left: none;
 }
 
-.grid-cell~.game-3x3:nth-child(3n + 3) {
+.game-3x3>.grid-cell:nth-child(3n + 3) {
     border-right: none;
 }
 
-.grid-cell~.game-3x3:nth-last-of-type(-n + 3) {
+.game-3x3>.grid-cell:nth-last-of-type(-n + 3) {
     border-bottom: none;
 }
-.grid-cell~.game-5x5:nth-child(-n + 5) {
+.game-5x5>.grid-cell:nth-child(-n + 5) {
     border-top: none;
 }
 
-.grid-cell~.game-5x5:nth-child(5n + 1) {
+.game-5x5>.grid-cell:nth-child(5n + 1) {
     border-left: none;
 }
 
-.grid-cell~.game-5x5:nth-child(5n + 5) {
+.game-5x5>.grid-cell:nth-child(5n + 5) {
     border-right: none;
 }
 
-.grid-cell~.game-5x5:nth-last-of-type(-n + 5) {
+.game-5x5>.grid-cell:nth-last-of-type(-n + 5) {
     border-bottom: none;
 }
 .disabled {
