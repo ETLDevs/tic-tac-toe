@@ -6,6 +6,10 @@ const game = {
   savedGame: { states: [[], []], xTurn: true },
   gamesCounter: 1,
   board3x3: true,
+  streaks5x5:{
+    xStreaks: 0,
+    oStreaks: 0
+  },
   winnings: {},
 
   winningStates3x3: [
@@ -136,13 +140,27 @@ document.addEventListener("click", (event) => {
     // 5X5 game
 if(!game.board3x3){
   
-  if (!document.querySelectorAll(".game-5x5 > .grid-cell:not(.disabled)").length-1) {
+  if (!document.querySelectorAll(".game-5x5 > .grid-cell:not(.disabled)").length) {
     document.querySelector(".game-over").classList.add("visible");
     document.querySelector(".game-over-text").textContent = "Draw!";
   } 
   game.winningStates5x5.forEach((winningState) => {
-    const xWins = winningState.every((state) => game.xState.includes(state));
-    const oWins = winningState.every((state) => game.oState.includes(state));
+    const xStreak = winningState.every((state) => game.xState.includes(state));
+    const oStreak = winningState.every((state) => game.oState.includes(state));
+    
+    if(xStreak) {
+      game.streaks5x5.xStreaks++;
+      game.xState = []}
+    if(oStreak){
+      game.streaks5x5.oStreaks++;
+      game.oState = []}
+
+      const xStreakNum = game.streaks5x5.xStreaks;
+      const oStreakNum = game.streaks5x5.oStreaks
+      const xWins = xStreakNum > oStreakNum ;
+      const oWins = oStreakNum > xStreakNum;
+
+
     if (xWins || oWins) {
       document
         .querySelectorAll(".grid-cell")
@@ -238,6 +256,8 @@ document.querySelectorAll(".restart").forEach((btn) => {
     game.xTurn = true;
     game.xState = [];
     game.oState = [];
+    game.streaks5x5.xStreaks = 0;
+    game.streaks5x5.oStreaks = 0;
   });
 });
 
