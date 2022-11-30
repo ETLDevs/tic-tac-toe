@@ -162,15 +162,10 @@ document.querySelectorAll(".restart").forEach((btn) => {
 document.querySelector(".toggle-board").addEventListener("click", (btn)=>{
   const board3x3 = document.querySelector(".game-3x3");
   const board5x5 = document.querySelector(".game-5x5");
+  board5x5.classList.toggle('hidden');
+  board3x3.classList.toggle('hidden');
   
-  if(board5x5.classList.contains('hidden')){
-    btn.target.innerHTML = '3X3 Board';
-    board5x5.classList.remove('hidden');
-    board3x3.classList.add('hidden')
-  }
-  else{
-    btn.target.innerHTML = '5X5 Board';
-    board3x3.classList.remove('hidden');
-    board5x5.classList.add('hidden');
-  }
+  board5x5.classList.contains('hidden') ?
+  btn.target.innerHTML = '3X3 Board':
+  btn.target.innerHTML = '5X5 Board'; 
 })
