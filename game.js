@@ -134,14 +134,30 @@ document.addEventListener("click", (event) => {
     });}
 
     // 5X5 game
-else{
+if(!game.board3x3){
   
   if (!document.querySelectorAll(".grid-cell:not(.disabled)").length-1) {
     document.querySelector(".game-over").classList.add("visible");
     document.querySelector(".game-over-text").textContent = "Draw!";
   } 
+  game.winningStates5x5.forEach((winningState) => {
+    const xWins = winningState.every((state) => game.xState.includes(state));
+    const oWins = winningState.every((state) => game.oState.includes(state));
+    if (xWins || oWins) {
+      document
+        .querySelectorAll(".grid-cell")
+        .forEach((cell) => cell.classList.add("disabled"));
+      document.querySelector(".game-over").classList.add("visible");
+      document.querySelector(".game-over-text").textContent = xWins
+        ? "X wins!"
+        : "O wins!";
+      game.winnings[game.gamesCounter] =
+        game.xState.length + game.oState.length;
+    } 
+})
 }
-  }
+
+}
 });
 
 document.querySelector(".return-one-step").addEventListener("click", () => {
@@ -233,9 +249,10 @@ document.querySelector(".toggle-board").addEventListener("click", (btn)=>{
   
   if(game.board3x3){
   btn.target.innerHTML = '3X3 Board';
-  game.board3x3 = 'false';}
+  game.board3x3 = false;
+}
   else{
   btn.target.innerHTML = '5X5 Board'; 
-  game.board3x3 = false;
+  game.board3x3 = true;
 }
 })
