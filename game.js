@@ -5,6 +5,7 @@ const game = {
   oState: [],
   savedGame: { states: [[], []], xTurn: true },
   gamesCounter: 1,
+  board3x3: true,
   winnings: {},
 
   winningStates: [
@@ -133,16 +134,16 @@ document.querySelector(".return-one-step").addEventListener("click", () => {
   const oState = game.oState;
   const xState = game.xState;
   const lastXCell = document.querySelector(
-    `[data-value = '${game.xState[xLength - 1]}']`
+    `[data-value = '${xState[xLength - 1]}']`
   );
   const lastOCell = document.querySelector(
-    `[data-value = '${game.oState[oLength - 1]}']`
+    `[data-value = '${oState[oLength - 1]}']`
   );
   if (xLength > 0) {
     if (game.xTurn) {
-      oneStepBack(lastOCell, "o", oState, (game.xTurn = false));
+      oneStepBack(lastOCell, "o", oState, game.xTurn = false);
     } else {
-      oneStepBack(lastXCell, "x", xState, (game.xTurn = true));
+      oneStepBack(lastXCell, "x", xState, game.xTurn = true);
     }
   }
 });
@@ -214,14 +215,11 @@ document.querySelector(".toggle-board").addEventListener("click", (btn)=>{
   board5x5.classList.toggle('hidden');
   board3x3.classList.toggle('hidden');
   
-  board5x5.classList.contains('hidden') ?
-  btn.target.innerHTML = '3X3 Board':
+  if(game.board3x3){
+  btn.target.innerHTML = '3X3 Board';
+  game.board3x3 = 'false';}
+  else{
   btn.target.innerHTML = '5X5 Board'; 
+  game.board3x3 = false;
+}
 })
-
-
-//test
-document.querySelectorAll('.grid-cell').forEach((cell) => 
-addEventListener('click', () =>{
-cell.innerHTML = cell.dataset.value;
-}))
