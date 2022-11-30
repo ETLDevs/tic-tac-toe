@@ -111,7 +111,7 @@ document.addEventListener("click", (event) => {
 //3X3 game    
     if(game.board3x3){
     // If all cells are disabled, then its draw
-    if (!document.querySelectorAll(".grid-cell:not(.disabled)").length) {
+    if (!document.querySelectorAll(".game-3x3 > .grid-cell:not(.disabled)").length) {
       document.querySelector(".game-over").classList.add("visible");
       document.querySelector(".game-over-text").textContent = "Draw!";
     }
@@ -136,7 +136,7 @@ document.addEventListener("click", (event) => {
     // 5X5 game
 if(!game.board3x3){
   
-  if (!document.querySelectorAll(".grid-cell:not(.disabled)").length-1) {
+  if (!document.querySelectorAll(".game5x5 > .grid-cell:not(.disabled)").length) {
     document.querySelector(".game-over").classList.add("visible");
     document.querySelector(".game-over-text").textContent = "Draw!";
   } 
