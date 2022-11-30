@@ -136,7 +136,7 @@ document.addEventListener("click", (event) => {
     // 5X5 game
 if(!game.board3x3){
   
-  if (!document.querySelectorAll(".game5x5 > .grid-cell:not(.disabled)").length) {
+  if (!document.querySelectorAll(".game-5x5 > .grid-cell:not(.disabled)").length-1) {
     document.querySelector(".game-over").classList.add("visible");
     document.querySelector(".game-over-text").textContent = "Draw!";
   } 
