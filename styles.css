@@ -73,6 +73,10 @@
     content: '⭕';
 }
 
+.streak {
+    background-color: greenyellow;
+}
+
 .game-over {
     display: none;
     position: absolute;

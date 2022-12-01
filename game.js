@@ -95,6 +95,23 @@ const saveStates = (playerState, savedState) => {
   });
 };
 
+const markStreak = (streak, opponent) => {
+  document.querySelectorAll('.grid-cell').forEach((cell) => {
+     streak.forEach((state =>{
+      if(cell.dataset.value === state){
+        cell.classList.add('streak')
+      }
+     }))
+    })
+    removeStreakFromState(streak, opponent)
+}
+
+const removeStreakFromState = (streak, opponent) => {
+  streak.forEach((state) =>{
+   opponent.splice(opponent.indexOf(state),1);
+  })
+}
+
 document.addEventListener("click", (event) => {
   const target = event.target;
   const isCell = target.classList.contains("grid-cell");
@@ -139,25 +156,25 @@ document.addEventListener("click", (event) => {
 
     // 5X5 game
 if(!game.board3x3){
-  
-
-   
+    
   game.winningStates5x5.forEach((winningState) => {
     const xStreak = winningState.every((state) => game.xState.includes(state));
     const oStreak = winningState.every((state) => game.oState.includes(state));
     
     if(xStreak) {
       game.streaks5x5.xStreaks++;
-      game.xState = []}
+      markStreak(winningState, game.xState);
+    }
     if(oStreak){
       game.streaks5x5.oStreaks++;
-      game.oState = []}
+      markStreak(winningState, game.oState)
+      }
 
       const xStreakNum = game.streaks5x5.xStreaks;
       const oStreakNum = game.streaks5x5.oStreaks;
       const xWins = xStreakNum > oStreakNum ;
       const oWins = oStreakNum > xStreakNum;
-      if (!document.querySelectorAll(".game-5x5 > .grid-cell:not(.disabled)").length) {
+      if (document.querySelectorAll(".game-5x5 > .grid-cell:not(.disabled)").length === 1) {
         document.querySelector(".game-over").classList.add("visible");
         document.querySelector(".game-over-text").textContent = "Draw!";
 
