@@ -267,7 +267,7 @@ document.querySelectorAll(".restart").forEach((btn) => {
     }
 
     document.querySelectorAll(".grid-cell").forEach((cell) => {
-      cell.classList.remove("disabled", "x", "o");
+      cell.classList.remove("disabled", "x", "o", "streak");
     });
     game.xTurn = true;
     game.xState = [];
