@@ -140,10 +140,8 @@ document.addEventListener("click", (event) => {
     // 5X5 game
 if(!game.board3x3){
   
-  if (!document.querySelectorAll(".game-5x5 > .grid-cell:not(.disabled)").length) {
-    document.querySelector(".game-over").classList.add("visible");
-    document.querySelector(".game-over-text").textContent = "Draw!";
-  } 
+
+   
   game.winningStates5x5.forEach((winningState) => {
     const xStreak = winningState.every((state) => game.xState.includes(state));
     const oStreak = winningState.every((state) => game.oState.includes(state));
@@ -156,10 +154,12 @@ if(!game.board3x3){
       game.oState = []}
 
       const xStreakNum = game.streaks5x5.xStreaks;
-      const oStreakNum = game.streaks5x5.oStreaks
+      const oStreakNum = game.streaks5x5.oStreaks;
       const xWins = xStreakNum > oStreakNum ;
       const oWins = oStreakNum > xStreakNum;
-
+      if (!document.querySelectorAll(".game-5x5 > .grid-cell:not(.disabled)").length) {
+        document.querySelector(".game-over").classList.add("visible");
+        document.querySelector(".game-over-text").textContent = "Draw!";
 
     if (xWins || oWins) {
       document
@@ -172,9 +172,8 @@ if(!game.board3x3){
       game.winnings[game.gamesCounter] =
         game.xState.length + game.oState.length;
     } 
-})
+}})
 }
-
 }
 });
 
