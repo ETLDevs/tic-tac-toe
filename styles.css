@@ -1,4 +1,4 @@
-#game {
+.game-3x3 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -7,12 +7,21 @@
     grid-template-columns: repeat(3, auto);
 }
 
+.game-5x5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+}
+
 .grid-cell {
     border: 1px solid #000;
     width: 50px;
     height: 50px;
     cursor: pointer;
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
     font-size: 28px;
@@ -22,22 +31,36 @@
     background: #eee;
 }
 
-.grid-cell:nth-child(-n + 3) {
+.game-3x3>.grid-cell:nth-child(-n + 3) {
     border-top: none;
 }
 
-.grid-cell:nth-child(3n + 1) {
-    border-left: none;
+.game-3x3>.grid-cell:nth-child(3n + 1) {
+  border-left: none;
 }
 
-.grid-cell:nth-child(3n + 3) {
+.game-3x3>.grid-cell:nth-child(3n + 3) {
     border-right: none;
 }
 
-.grid-cell:nth-last-of-type(-n + 3) {
+.game-3x3>.grid-cell:nth-last-of-type(-n + 3) {
     border-bottom: none;
 }
+.game-5x5>.grid-cell:nth-child(-n + 5) {
+    border-top: none;
+}
 
+.game-5x5>.grid-cell:nth-child(5n + 1) {
+    border-left: none;
+}
+
+.game-5x5>.grid-cell:nth-child(5n + 5) {
+    border-right: none;
+}
+
+.game-5x5>.grid-cell:nth-last-of-type(-n + 5) {
+    border-bottom: none;
+}
 .disabled {
     cursor: not-allowed;
 }
@@ -48,6 +71,14 @@
 
 .o::after {
     content: '⭕';
+}
+
+.streak.x {
+    background-color: greenyellow;
+}
+
+.streak.o {
+    background-color: lightskyblue;
 }
 
 .game-over {
@@ -71,4 +102,8 @@
 
 .visible {
     display: block;
+}
+
+.hidden{
+    display: none
 }
