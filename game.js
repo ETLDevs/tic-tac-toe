@@ -134,8 +134,8 @@ document.querySelector(".load-game").addEventListener("click", () => {
     game.oState.push(...savedStates[1]);
     document.querySelectorAll(".grid-cell").forEach((cell) => {
       cell.classList.remove("disabled", "x", "o");
-      if (game.xState.includes(cell.dataset.value)) cell.classList.add("x");
-      if (game.oState.includes(cell.dataset.value)) cell.classList.add("o");
+      if (game.xState.includes(cell.dataset.value)) cell.classList.add("x", "disabled");
+      if (game.oState.includes(cell.dataset.value)) cell.classList.add("o", "disabled");
     });
     game.xTurn = game.savedGame.xTurn;
   } else {
