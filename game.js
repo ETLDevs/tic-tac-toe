@@ -8,19 +8,19 @@ const game = {
   winnings: {},
 
   winningStates: [
-    // Rows
-    ["0", "1", "2"],
-    ["3", "4", "5"],
-    ["6", "7", "8"],
+    // // Rows
+    // ["0", "1", "2"],
+    // ["3", "4", "5"],
+    // ["6", "7", "8"],
 
-    // Columns
-    ["0", "3", "6"],
-    ["1", "4", "7"],
-    ["2", "5", "8"],
+    // // Columns
+    // ["0", "3", "6"],
+    // ["1", "4", "7"],
+    // ["2", "5", "8"],
 
-    // Diagonal
-    ["0", "4", "8"],
-    ["2", "4", "6"],
+    // // Diagonal
+    // ["0", "4", "8"],
+    // ["2", "4", "6"],
   ],
 };
 
@@ -35,6 +35,22 @@ const saveStates = (playerState, savedState) => {
     savedState.push(state);
   });
 };
+
+const createBoard = (size) => {
+const gameContainer =  document.querySelector('.game');
+gameContainer.innerHTML = "";
+for(let i = 0; i < (size**2); i++){
+  const cell = document.createElement('div');
+  cell.classList.add(`grid-cell`)
+  gameContainer.appendChild(cell);
+}
+}
+
+document.querySelectorAll(".board-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+ createBoard(btn.dataset.board)
+})
+})
 
 document.addEventListener("click", (event) => {
   const target = event.target;
