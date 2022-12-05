@@ -41,16 +41,57 @@ const gameContainer =  document.querySelector('.game');
 gameContainer.innerHTML = "";
 for(let i = 0; i < (size**2); i++){
   const cell = document.createElement('div');
-  cell.classList.add(`grid-cell`)
+  cell.classList.add(`grid-cell`);
+  cell.dataset.value = i;
   gameContainer.appendChild(cell);
 }
-}
+};
+
+const transposeMatrix = (matrix) => {
+  const row = matrix;
+  return row.map((_, col) => matrix.map((row) => row[col]));
+};
+
+ const getSolutions = (size) => {
+  const rows = [];
+  let i = 0;
+  while (i < size) {
+    const row = [];
+    let c = 0;
+    while (c < size) {
+      row.push(i * size + c);
+      c++;
+    }
+    rows.push(row);
+    i++;
+  }
+
+  const columns = transposeMatrix(rows);
+
+  const leftDiagonal = [];
+  i = 0;
+  while (i < size) {
+    leftDiagonal.push(rows[i][i]);
+    i++;
+  }
+
+  const rightDiagonal = [];
+  i = 0;
+  let k = size - 1;
+  while (i < size) {
+    rightDiagonal.push(rows[i][k--]);
+    i++;
+  }
+
+  game.winningStates = [...rows, ...columns, leftDiagonal, rightDiagonal];
+};
 
 document.querySelectorAll(".board-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
- createBoard(btn.dataset.board)
+ createBoard(btn.dataset.board);
+ getSolutions(btn.dataset.board)
 })
-})
+});
 
 document.addEventListener("click", (event) => {
   const target = event.target;
@@ -174,3 +215,4 @@ document.querySelectorAll(".restart").forEach((btn) => {
     game.oState = [];
   });
 });
+
