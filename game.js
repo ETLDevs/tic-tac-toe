@@ -151,6 +151,9 @@ document.querySelector(".return-one-step").addEventListener("click", () => {
       oneStepBack(lastXCell, "x", xState, (game.xTurn = true));
     }
   }
+  else {
+    alert("The board still empty!")
+  }
 });
 
 document.querySelector(".show-record").addEventListener("click", () => {
@@ -182,7 +185,7 @@ document.querySelector(".save-game").addEventListener("click", function () {
 
 document.querySelector(".load-game").addEventListener("click", () => {
   const savedStates = game.savedGame.states;
-    if (savedStates.length > 0) {
+    if (savedStates[0].length > 0) {
     game.xState = [];
     game.oState =[];
     game.xState.push(...savedStates[0]);
@@ -219,6 +222,7 @@ document.querySelectorAll(".restart").forEach((btn) => {
     game.xTurn = true;
     game.xState = [];
     game.oState = [];
+    game.savedGame = { states: [[], []], xTurn: true };
   });
 });
 
