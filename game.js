@@ -1,27 +1,13 @@
 "use strict";
 const game = {
+  boardSize: "",
   xTurn: true,
   xState: [],
   oState: [],
   savedGame: { states: [[], []], xTurn: true },
   gamesCounter: 1,
   winnings: {},
-
-  winningStates: [
-    // // Rows
-    // ["0", "1", "2"],
-    // ["3", "4", "5"],
-    // ["6", "7", "8"],
-
-    // // Columns
-    // ["0", "3", "6"],
-    // ["1", "4", "7"],
-    // ["2", "5", "8"],
-
-    // // Diagonal
-    // ["0", "4", "8"],
-    // ["2", "4", "6"],
-  ],
+  winningStates: [],
 };
 
 const oneStepBack = (lastCell, player, state, xTurn) => {
@@ -38,13 +24,17 @@ const saveStates = (playerState, savedState) => {
 
 const createBoard = (size) => {
 const gameContainer =  document.querySelector('.game');
+if(game.boardSize !== "")
+gameContainer.classList.remove(game.boardSize);
 gameContainer.innerHTML = "";
 for(let i = 0; i < (size**2); i++){
   const cell = document.createElement('div');
   cell.classList.add(`grid-cell`);
   cell.dataset.value = i;
   gameContainer.appendChild(cell);
+  game.boardSize =`x${size}`
 }
+gameContainer.classList.add(game.boardSize);
 };
 
 const transposeMatrix = (matrix) => {
@@ -59,7 +49,7 @@ const transposeMatrix = (matrix) => {
     const row = [];
     let c = 0;
     while (c < size) {
-      row.push(i * size + c);
+      row.push(i * size + c + "");
       c++;
     }
     rows.push(row);
@@ -88,9 +78,13 @@ const transposeMatrix = (matrix) => {
 
 document.querySelectorAll(".board-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
- createBoard(btn.dataset.board);
- getSolutions(btn.dataset.board)
-})
+const boardSize = btn.dataset.board;
+ createBoard(boardSize);
+ getSolutions(boardSize);
+ document.querySelectorAll(".feature").forEach((btn) => {
+  btn.classList.remove('hidden');
+ })
+});
 });
 
 document.addEventListener("click", (event) => {
@@ -206,7 +200,9 @@ document.querySelectorAll(".restart").forEach((btn) => {
       document.querySelector(".game-over").classList.remove("visible");
       game.gamesCounter++;
     }
-
+    document.querySelectorAll(".feature").forEach((btn) => {
+      btn.classList.add('hidden');
+     })
     document.querySelectorAll(".grid-cell").forEach((cell) => {
       cell.classList.remove("disabled", "x", "o");
     });
