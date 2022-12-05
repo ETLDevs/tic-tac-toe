@@ -24,6 +24,7 @@ const saveStates = (playerState, savedState) => {
 
 const createBoard = (size) => {
 const gameContainer =  document.querySelector('.game');
+gameContainer.classList.remove("hidden");
 if(game.boardSize !== "")
 gameContainer.classList.remove(game.boardSize);
 gameContainer.innerHTML = "";
@@ -81,9 +82,12 @@ document.querySelectorAll(".board-btn").forEach((btn) => {
 const boardSize = btn.dataset.board;
  createBoard(boardSize);
  getSolutions(boardSize);
- document.querySelectorAll(".feature").forEach((btn) => {
-  btn.classList.remove('hidden');
- })
+ 
+ document.querySelectorAll("button").forEach((btn) => {
+  (btn.classList.contains("hidden")) ?
+  btn.classList.remove("hidden") :
+  btn.classList.add("hidden");
+});
 });
 });
 
@@ -200,12 +204,18 @@ document.querySelectorAll(".restart").forEach((btn) => {
       document.querySelector(".game-over").classList.remove("visible");
       game.gamesCounter++;
     }
-    document.querySelectorAll(".feature").forEach((btn) => {
-      btn.classList.add('hidden');
-     })
+    document.querySelectorAll("button").forEach((btn) => {
+      (btn.classList.contains('hidden')) ?
+      btn.classList.remove("hidden") :
+      btn.classList.add("hidden");
+     });
+
     document.querySelectorAll(".grid-cell").forEach((cell) => {
       cell.classList.remove("disabled", "x", "o");
     });
+
+    document.querySelector(".game").classList.add("hidden");
+
     game.xTurn = true;
     game.xState = [];
     game.oState = [];
