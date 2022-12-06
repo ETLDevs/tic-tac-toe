@@ -1,5 +1,6 @@
-"use strict";
-const game = {
+import { getSolutions } from "./winningStates.js";
+
+export const game = {
   boardSize: "",
   xTurn: true,
   xState: [],
@@ -23,72 +24,31 @@ const saveStates = (playerState, savedState) => {
 };
 
 const createBoard = (size) => {
-const gameContainer =  document.querySelector('.game');
-gameContainer.classList.remove("hidden");
-if(game.boardSize !== "")
-gameContainer.classList.remove(game.boardSize);
-gameContainer.innerHTML = "";
-for(let i = 0; i < (size**2); i++){
-  const cell = document.createElement('div');
-  cell.classList.add(`grid-cell`);
-  cell.dataset.value = i;
-  gameContainer.appendChild(cell);
-  game.boardSize =`x${size}`
-}
-gameContainer.classList.add(game.boardSize);
-};
-
-const transposeMatrix = (matrix) => {
-  const row = matrix;
-  return row.map((_, col) => matrix.map((row) => row[col]));
-};
-
- const getSolutions = (size) => {
-  const rows = [];
-  let i = 0;
-  while (i < size) {
-    const row = [];
-    let c = 0;
-    while (c < size) {
-      row.push(i * size + c + "");
-      c++;
-    }
-    rows.push(row);
-    i++;
+  const boardSize = `x${size}`
+  const gameContainer = document.querySelector(".game");
+  gameContainer.classList.remove("hidden");
+  if (game.boardSize !== "") {
+    gameContainer.classList.remove(game.boardSize);}
+  gameContainer.innerHTML = "";
+  for (let i = 0; i < size ** 2; i++) {
+    const cell = document.createElement("div");
+    cell.classList.add(`grid-cell`);
+    cell.dataset.value = i;
+    gameContainer.appendChild(cell);
   }
-
-  const columns = transposeMatrix(rows);
-
-  const leftDiagonal = [];
-  i = 0;
-  while (i < size) {
-    leftDiagonal.push(rows[i][i]);
-    i++;
-  }
-
-  const rightDiagonal = [];
-  i = 0;
-  let k = size - 1;
-  while (i < size) {
-    rightDiagonal.push(rows[i][k--]);
-    i++;
-  }
-
-  game.winningStates = [...rows, ...columns, leftDiagonal, rightDiagonal];
+  game.boardSize = boardSize;
+  gameContainer.classList.add(boardSize);
 };
 
 document.querySelectorAll(".board-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
-const boardSize = btn.dataset.board;
- createBoard(boardSize);
- getSolutions(boardSize);
- 
- document.querySelectorAll("button").forEach((btn) => {
-  (btn.classList.contains("hidden")) ?
-  btn.classList.remove("hidden") :
-  btn.classList.add("hidden");
-});
-});
+      const boardSize = btn.dataset.board;
+      createBoard(boardSize);
+      getSolutions(boardSize);
+      document.querySelectorAll("button").forEach((btn) =>{
+        btn.classList.toggle("hidden");
+      })
+  });
 });
 
 document.addEventListener("click", (event) => {
@@ -150,9 +110,8 @@ document.querySelector(".return-one-step").addEventListener("click", () => {
     } else {
       oneStepBack(lastXCell, "x", xState, (game.xTurn = true));
     }
-  }
-  else {
-    alert("The board still empty!")
+  } else {
+    alert("The board still empty!");
   }
 });
 
@@ -174,10 +133,10 @@ document.querySelector(".show-record").addEventListener("click", () => {
 
 document.querySelector(".save-game").addEventListener("click", function () {
   game.savedGame.states = [[], []];
-  if (game.xState.length > 0){ 
+  if (game.xState.length > 0) {
     saveStates(game.xState, game.savedGame.states[0]);
-    saveStates(game.oState, game.savedGame.states[1]);}
-   else {
+    saveStates(game.oState, game.savedGame.states[1]);
+  } else {
     alert("The board still empty");
   }
   game.savedGame.xTurn = game.xTurn;
@@ -185,15 +144,17 @@ document.querySelector(".save-game").addEventListener("click", function () {
 
 document.querySelector(".load-game").addEventListener("click", () => {
   const savedStates = game.savedGame.states;
-    if (savedStates[0].length > 0) {
+  if (savedStates[0].length > 0) {
     game.xState = [];
-    game.oState =[];
+    game.oState = [];
     game.xState.push(...savedStates[0]);
     game.oState.push(...savedStates[1]);
     document.querySelectorAll(".grid-cell").forEach((cell) => {
       cell.classList.remove("disabled", "x", "o");
-      if (game.xState.includes(cell.dataset.value)) cell.classList.add("x", "disabled");
-      if (game.oState.includes(cell.dataset.value)) cell.classList.add("o", "disabled");
+      if (game.xState.includes(cell.dataset.value)){
+        cell.classList.add("x", "disabled")};
+      if (game.oState.includes(cell.dataset.value)){
+        cell.classList.add("o", "disabled");}
     });
     game.xTurn = game.savedGame.xTurn;
   } else {
@@ -208,10 +169,8 @@ document.querySelectorAll(".restart").forEach((btn) => {
       game.gamesCounter++;
     }
     document.querySelectorAll("button").forEach((btn) => {
-      (btn.classList.contains('hidden')) ?
-      btn.classList.remove("hidden") :
-      btn.classList.add("hidden");
-     });
+      btn.classList.toggle("hidden");
+    });
 
     document.querySelectorAll(".grid-cell").forEach((cell) => {
       cell.classList.remove("disabled", "x", "o");
@@ -225,4 +184,3 @@ document.querySelectorAll(".restart").forEach((btn) => {
     game.savedGame = { states: [[], []], xTurn: true };
   });
 });
-
