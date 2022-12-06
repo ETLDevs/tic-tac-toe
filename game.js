@@ -1,6 +1,6 @@
 import { getSolutions } from "./winningStates.js";
 
-export const game = {
+const game = {
   boardSize: "",
   xTurn: true,
   xState: [],
@@ -9,6 +9,7 @@ export const game = {
   gamesCounter: 1,
   winnings: {},
   winningStates: [],
+  alerts: [["The board still empty!"], ["No winnings yet"], ["No saved game"]]
 };
 
 const oneStepBack = (lastCell, player, state, xTurn) => {
@@ -24,7 +25,7 @@ const saveStates = (playerState, savedState) => {
 };
 
 const createBoard = (size) => {
-  const boardSize = `x${size}`
+  const boardSizeClass = `x${size}`
   const gameContainer = document.querySelector(".game");
   gameContainer.classList.remove("hidden");
   if (game.boardSize !== "") {
@@ -36,15 +37,15 @@ const createBoard = (size) => {
     cell.dataset.value = i;
     gameContainer.appendChild(cell);
   }
-  game.boardSize = boardSize;
-  gameContainer.classList.add(boardSize);
+  game.boardSize = boardSizeClass;
+  gameContainer.classList.add(boardSizeClass);
 };
 
 document.querySelectorAll(".board-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
-      const boardSize = btn.dataset.board;
+    const boardSize = btn.dataset.board;
       createBoard(boardSize);
-      getSolutions(boardSize);
+      game.winningStates = getSolutions(boardSize);
       document.querySelectorAll("button").forEach((btn) =>{
         btn.classList.toggle("hidden");
       })
@@ -111,7 +112,7 @@ document.querySelector(".return-one-step").addEventListener("click", () => {
       oneStepBack(lastXCell, "x", xState, (game.xTurn = true));
     }
   } else {
-    alert("The board still empty!");
+    alert(game.alerts[0]);
   }
 });
 
@@ -127,7 +128,7 @@ document.querySelector(".show-record").addEventListener("click", () => {
       `The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`
     );
   } else {
-    alert("No winnings yet");
+    alert(game.alerts[1]);
   }
 });
 
@@ -137,7 +138,7 @@ document.querySelector(".save-game").addEventListener("click", function () {
     saveStates(game.xState, game.savedGame.states[0]);
     saveStates(game.oState, game.savedGame.states[1]);
   } else {
-    alert("The board still empty");
+    alert(game.alerts[0]);
   }
   game.savedGame.xTurn = game.xTurn;
 });
@@ -158,7 +159,7 @@ document.querySelector(".load-game").addEventListener("click", () => {
     });
     game.xTurn = game.savedGame.xTurn;
   } else {
-    alert("No saved game");
+    alert(game.alerts[2]);
   }
 });
 
