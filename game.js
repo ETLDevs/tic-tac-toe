@@ -9,7 +9,11 @@ const game = {
   gamesCounter: 1,
   winnings: {},
   winningStates: [],
-  alerts: [["The board still empty!"], ["No winnings yet"], ["No saved game"]]
+  alerts: {
+    emptyBoard: "The board still empty!", 
+    noWin: "No winnings yet",
+    noSave: "No saved game"
+}
 };
 
 const oneStepBack = (lastCell, player, state, xTurn) => {
@@ -38,7 +42,7 @@ const createBoard = (size) => {
     gameContainer.appendChild(cell);
   }
   game.boardSize = boardSizeClass;
-  gameContainer.classList.add(boardSizeClass);
+  document.documentElement.style.setProperty('--boardSize', size)
 };
 
 document.querySelectorAll(".board-btn").forEach((btn) => {
@@ -112,7 +116,7 @@ document.querySelector(".return-one-step").addEventListener("click", () => {
       oneStepBack(lastXCell, "x", xState, (game.xTurn = true));
     }
   } else {
-    alert(game.alerts[0]);
+    alert(game.alerts.emptyBoard);
   }
 });
 
@@ -128,7 +132,7 @@ document.querySelector(".show-record").addEventListener("click", () => {
       `The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`
     );
   } else {
-    alert(game.alerts[1]);
+    alert(game.alerts.noWin);
   }
 });
 
@@ -138,7 +142,7 @@ document.querySelector(".save-game").addEventListener("click", function () {
     saveStates(game.xState, game.savedGame.states[0]);
     saveStates(game.oState, game.savedGame.states[1]);
   } else {
-    alert(game.alerts[0]);
+    alert(game.alerts.emptyBoard);
   }
   game.savedGame.xTurn = game.xTurn;
 });
@@ -159,7 +163,7 @@ document.querySelector(".load-game").addEventListener("click", () => {
     });
     game.xTurn = game.savedGame.xTurn;
   } else {
-    alert(game.alerts[2]);
+    alert(game.alerts.noSave);
   }
 });
 
