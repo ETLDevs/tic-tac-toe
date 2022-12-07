@@ -145,22 +145,23 @@ document.querySelector(".save-game").addEventListener("click", () => {
     alert(game.alerts.emptyBoard);
   }
   game.savedGame.xTurn = game.xTurn;
-  console.log(game.savedGame)
 });
 
 document.querySelector(".load-game").addEventListener("click", () => {
-  const savedStates = game.savedGame.states;
-  if (savedStates[0].length > 0) {
+  const savedStates = game.savedGame;
+  if (savedStates.x.length > 0) {
     game.xState = [];
     game.oState = [];
-    game.xState.push(...savedStates[0]);
-    game.oState.push(...savedStates[1]);
+    game.xState.push(...savedStates.x);
+    game.oState.push(...savedStates.o);
+
     document.querySelectorAll(".grid-cell").forEach((cell) => {
       cell.classList.remove("disabled", "x", "o");
-      if (game.xState.includes(cell.dataset.value)) {
+      const cellValue = cell.dataset.value;
+      if (game.xState.includes(cellValue)) {
         cell.classList.add("x", "disabled");
       }
-      if (game.oState.includes(cell.dataset.value)) {
+      if (game.oState.includes(cellValue)) {
         cell.classList.add("o", "disabled");
       }
     });
