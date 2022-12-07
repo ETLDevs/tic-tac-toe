@@ -35,8 +35,13 @@ const createBoard = (size) => {
 const oneStepBack = (lastCell, player, state, xTurn) => {
   lastCell.classList.remove(`${player}`, "disabled");
   state.pop();
-  game.xTurn = xTurn;
+  game.xTurn = !game.xTurn;
 };
+
+const findLastCell = (state, length) => {
+  return document.querySelector(
+    `[data-value = '${state[length - 1]}']`)
+  }
 
 const saveStates = (playerState, savedState) => {
   playerState.map((state) => {
@@ -102,17 +107,14 @@ document.querySelector(".return-one-step").addEventListener("click", () => {
   const oLength = game.oState.length;
   const oState = game.oState;
   const xState = game.xState;
-  const lastXCell = document.querySelector(
-    `[data-value = '${game.xState[xLength - 1]}']`
-  );
-  const lastOCell = document.querySelector(
-    `[data-value = '${game.oState[oLength - 1]}']`
-  );
+  const lastXCell = findLastCell (xState, xLength);
+  const lastOCell = findLastCell (oState, oLength);
   if (xLength > 0) {
     if (game.xTurn) {
-      oneStepBack(lastOCell, "o", oState, (game.xTurn = false));
-    } else {
-      oneStepBack(lastXCell, "x", xState, (game.xTurn = true));
+      oneStepBack(lastOCell, "o", oState);
+    } 
+    else {
+      oneStepBack(lastXCell, "x", xState);
     }
   } else {
     alert(game.alerts.emptyBoard);
