@@ -16,21 +16,7 @@ const game = {
   },
 };
 
-const oneStepBack = (lastCell, player, state, xTurn) => {
-  lastCell.classList.remove(`${player}`, "disabled");
-  state.pop();
-  game.xTurn = xTurn;
-};
-
-const saveStates = (playerState, savedState) => {
-  playerState.map((state) => {
-    savedState.push(state);
-  });
-};
-
-
 const createBoard = (size) => {
-  const boardSizeClass = `x${size}`;
   const gameContainer = document.querySelector(".game");
   gameContainer.classList.remove("hidden");
   if (game.boardSize !== "") {
@@ -42,8 +28,20 @@ const createBoard = (size) => {
     cell.dataset.value = i;
     gameContainer.appendChild(cell);
   }
-  game.boardSize = boardSizeClass;
+  game.boardSize = size;
   document.documentElement.style.setProperty("--boardSize", size);
+};
+
+const oneStepBack = (lastCell, player, state, xTurn) => {
+  lastCell.classList.remove(`${player}`, "disabled");
+  state.pop();
+  game.xTurn = xTurn;
+};
+
+const saveStates = (playerState, savedState) => {
+  playerState.map((state) => {
+    savedState.push(state);
+  });
 };
 
 document.querySelectorAll(".board-btn").forEach((btn) => {
@@ -100,8 +98,8 @@ document.addEventListener("click", (event) => {
 });
 
 document.querySelector(".return-one-step").addEventListener("click", () => {
-  let xLength = game.xState.length;
-  let oLength = game.oState.length;
+  const xLength = game.xState.length;
+  const oLength = game.oState.length;
   const oState = game.oState;
   const xState = game.xState;
   const lastXCell = document.querySelector(
@@ -137,7 +135,7 @@ document.querySelector(".show-record").addEventListener("click", () => {
   }
 });
 
-document.querySelector(".save-game").addEventListener("click", function () {
+document.querySelector(".save-game").addEventListener("click", () => {
   game.savedGame.states = [[], []];
   if (game.xState.length > 0) {
     saveStates(game.xState, game.savedGame.states[0]);
