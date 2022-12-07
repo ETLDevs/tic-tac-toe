@@ -5,7 +5,7 @@ const game = {
   xTurn: true,
   xState: [],
   oState: [],
-  savedGame: { states: [[], []], xTurn: true },
+  savedGame: { x:[], o:[], xTurn: true },
   gamesCounter: 1,
   winnings: {},
   winningStates: [],
@@ -44,7 +44,7 @@ const findLastCell = (state, length) => {
   }
 
 const saveStates = (playerState, savedState) => {
-  playerState.map((state) => {
+  playerState.forEach((state) => {
     savedState.push(state);
   });
 };
@@ -138,14 +138,14 @@ document.querySelector(".show-record").addEventListener("click", () => {
 });
 
 document.querySelector(".save-game").addEventListener("click", () => {
-  game.savedGame.states = [[], []];
   if (game.xState.length > 0) {
-    saveStates(game.xState, game.savedGame.states[0]);
-    saveStates(game.oState, game.savedGame.states[1]);
+    saveStates(game.xState, game.savedGame.x);
+    saveStates(game.oState, game.savedGame.o);
   } else {
     alert(game.alerts.emptyBoard);
   }
   game.savedGame.xTurn = game.xTurn;
+  console.log(game.savedGame)
 });
 
 document.querySelector(".load-game").addEventListener("click", () => {
