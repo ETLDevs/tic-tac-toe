@@ -1,12 +1,18 @@
-#game {
+:root {
+    --boardSize: 3;
+}
+
+.game {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns:repeat(var(--boardSize), auto);
 }
-
+.game.x5 {
+    grid-template-columns: repeat(5, auto);  
+}
 .grid-cell {
     border: 1px solid #000;
     width: 50px;
@@ -20,22 +26,6 @@
 
 .grid-cell:not(.disabled):hover {
     background: #eee;
-}
-
-.grid-cell:nth-child(-n + 3) {
-    border-top: none;
-}
-
-.grid-cell:nth-child(3n + 1) {
-    border-left: none;
-}
-
-.grid-cell:nth-child(3n + 3) {
-    border-right: none;
-}
-
-.grid-cell:nth-last-of-type(-n + 3) {
-    border-bottom: none;
 }
 
 .disabled {
@@ -71,4 +61,8 @@
 
 .visible {
     display: block;
+}
+
+.hidden {
+    display: none;
 }

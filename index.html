@@ -5,30 +5,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
-        <script src="game.js" defer ></script>
+        <script src="game.js" defer type="module"></script>
 
         <title>❌⭕ Tic-Tac-Toe</title>
     </head>
     <body>
-        <button class="restart">Restart</button>
-        <button class="return-one-step">Return One Step</button>
-        <button class="show-record">Show Record</button>
-        <button class="save-game" title="You can't save more than one game">Save Game</button>
-        <button class="load-game">Load Game</button>
-        <div id="game">
-            <div class="grid-cell" data-value="0"></div>
-            <div class="grid-cell" data-value="1"></div>
-            <div class="grid-cell" data-value="2"></div>
-            <div class="grid-cell" data-value="3"></div>
-            <div class="grid-cell" data-value="4"></div>
-            <div class="grid-cell" data-value="5"></div>
-            <div class="grid-cell" data-value="6"></div>
-            <div class="grid-cell" data-value="7"></div>
-            <div class="grid-cell" data-value="8"></div>
+        <button class="board-btn" data-board = "3">3X3 Board</button>
+        <button class="board-btn" data-board = "5">5X5 Board</button>
+        <button class="feature restart hidden" title = "If you'll restart your saved game will be erased">Restart</button>
+        <button class="feature return-one-step hidden">Return One Step</button>
+        <button class="feature show-record hidden">Show Record</button>
+        <button class="feature save-game hidden" title = "You can't save more than one game">Save Game</button>
+        <button class="feature load-game hidden">Load Game</button>
+        
+        <div class="game">
+            
         </div>
+        
         <div class="game-over">
             <span class="game-over-text"></span>
-            <button class="restart">Restart</button>
+            <button class="restart hidden">Restart</button>
         </div>
     </body>
 </html>
