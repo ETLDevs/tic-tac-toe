@@ -190,6 +190,6 @@ document.querySelectorAll(".restart").forEach((btn) => {
     game.xTurn = true;
     game.xState = [];
     game.oState = [];
-    game.savedGame = { states: [[], []], xTurn: true };
+    game.savedGame = {x: [], o: [], xTurn: true };
   });
 });
