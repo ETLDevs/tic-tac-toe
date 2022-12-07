@@ -10,10 +10,10 @@ const game = {
   winnings: {},
   winningStates: [],
   alerts: {
-    emptyBoard: "The board still empty!", 
+    emptyBoard: "The board still empty!",
     noWin: "No winnings yet",
-    noSave: "No saved game"
-}
+    noSave: "No saved game",
+  },
 };
 
 const oneStepBack = (lastCell, player, state, xTurn) => {
@@ -28,13 +28,14 @@ const saveStates = (playerState, savedState) => {
   });
 };
 
+
 const createBoard = (size) => {
-  const boardSizeClass = `x${size}`
+  const boardSizeClass = `x${size}`;
   const gameContainer = document.querySelector(".game");
   gameContainer.classList.remove("hidden");
   if (game.boardSize !== "") {
-    gameContainer.classList.remove(game.boardSize);}
-  gameContainer.innerHTML = "";
+    gameContainer.innerHTML = "";
+  }
   for (let i = 0; i < size ** 2; i++) {
     const cell = document.createElement("div");
     cell.classList.add(`grid-cell`);
@@ -42,17 +43,17 @@ const createBoard = (size) => {
     gameContainer.appendChild(cell);
   }
   game.boardSize = boardSizeClass;
-  document.documentElement.style.setProperty('--boardSize', size)
+  document.documentElement.style.setProperty("--boardSize", size);
 };
 
 document.querySelectorAll(".board-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     const boardSize = btn.dataset.board;
-      createBoard(boardSize);
-      game.winningStates = getSolutions(boardSize);
-      document.querySelectorAll("button").forEach((btn) =>{
-        btn.classList.toggle("hidden");
-      })
+    createBoard(boardSize);
+    game.winningStates = getSolutions(boardSize);
+    document.querySelectorAll("button").forEach((btn) => {
+      btn.classList.toggle("hidden");
+    });
   });
 });
 
@@ -156,10 +157,12 @@ document.querySelector(".load-game").addEventListener("click", () => {
     game.oState.push(...savedStates[1]);
     document.querySelectorAll(".grid-cell").forEach((cell) => {
       cell.classList.remove("disabled", "x", "o");
-      if (game.xState.includes(cell.dataset.value)){
-        cell.classList.add("x", "disabled")};
-      if (game.oState.includes(cell.dataset.value)){
-        cell.classList.add("o", "disabled");}
+      if (game.xState.includes(cell.dataset.value)) {
+        cell.classList.add("x", "disabled");
+      }
+      if (game.oState.includes(cell.dataset.value)) {
+        cell.classList.add("o", "disabled");
+      }
     });
     game.xTurn = game.savedGame.xTurn;
   } else {
