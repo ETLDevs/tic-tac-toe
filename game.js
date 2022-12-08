@@ -103,20 +103,25 @@ document.addEventListener("click", (event) => {
 });
 
 document.querySelector(".return-one-step").addEventListener("click", () => {
-  const xLength = game.xState.length;
-  const oLength = game.oState.length;
-  const oState = game.oState;
-  const xState = game.xState;
-  const lastXCell = findLastCell (xState, xLength);
-  const lastOCell = findLastCell (oState, oLength);
-  if (xLength > 0) {
-    if (game.xTurn) {
-      oneStepBack(lastOCell, "o", oState);
-    } 
-    else {
-      oneStepBack(lastXCell, "x", xState);
-    }
-  } else {
+  const userLastState = game.xTurn ? game.oState : game.xState;
+  const userSymbol = game.xTurn ? 'o' : 'x'; 
+  const lastCell = document.querySelector(
+    `[data-value = '${userLastState[userLastState.length - 1]}']`)
+  // const xLength = game.xState.length;
+  // const oLength = game.oState.length;
+  // const oState = game.oState;
+  // const xState = game.xState;
+  // const lastXCell = findLastCell (xState, xLength);
+  // const lastOCell = findLastCell (oState, oLength);
+  if (userLastState.length > 0) {
+    // if (game.xTurn) {
+      oneStepBack(lastCell, userSymbol, userLastState);
+  //   } 
+  //   else {
+  //     oneStepBack(lastXCell, "x", xState);
+  //   }
+  } 
+  else {
     alert(game.alerts.emptyBoard);
   }
 });
