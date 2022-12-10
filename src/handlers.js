@@ -95,3 +95,24 @@ export const restart = (game, gameTools) => {
     });
   });
 };
+
+export const ReturnOneStep = (game, ALERTS) => {
+    document.querySelector(".return-one-step").addEventListener("click", () => {
+    const userLastState = game.xTurn ? game.oState : game.xState;
+    const userSymbol = game.xTurn ? 'o' : 'x'; 
+    const lastCell = document.querySelector(
+      `[data-value = '${userLastState[userLastState.length - 1]}']`)
+    if (userLastState.length > 0) {
+        oneStepBack(lastCell, userSymbol, userLastState, game);
+    } 
+    else {
+      alert(ALERTS.emptyBoard);
+    }
+  });
+};
+
+const oneStepBack = (lastCell, player, state, game) => {
+    lastCell.classList.remove(`${player}`, "disabled");
+    state.pop();
+    game.xTurn = !game.xTurn;
+  };
