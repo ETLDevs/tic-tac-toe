@@ -1,4 +1,3 @@
-import { ALERTS, gameTools } from "./store.js";
 import { getSolutions } from "./winningStates.js";
 
 const createBoard = (size) => {
