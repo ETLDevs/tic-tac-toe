@@ -1,6 +1,13 @@
-import {game, gameTools, gridCell, ALERTS} from "./store.js";
-import { chooseBoard, gameMoves, restart, ReturnOneStep, showRecord, saveGame, loadGame } from "./handlers.js";
-
+import { game, gameTools, ALERTS } from "./store.js";
+import {
+  chooseBoard,
+  gameMoves,
+  restart,
+  ReturnOneStep,
+  showRecord,
+  saveGame,
+  loadGame,
+} from "./handlers.js";
 
 chooseBoard(game, gameTools);
 gameMoves(game, gameTools);

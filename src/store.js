@@ -7,9 +7,9 @@ export const game = {
 };
 
 export const gameTools = {
-gamesCounter: 1,
-boardSize: "",
-savedGame: { x: [], o: [], xTurn: true },
+  gamesCounter: 1,
+  boardSize: "",
+  savedGame: { x: [], o: [], xTurn: true },
 };
 
 export const ALERTS = {
@@ -17,5 +17,3 @@ export const ALERTS = {
   noWin: "No winnings yet",
   noSave: "No saved game",
 };
-
-export const gridCell = document.querySelectorAll('grid-cell');
