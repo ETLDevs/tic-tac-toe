@@ -1,3 +1,4 @@
+import { ALERTS } from "./store.js";
 import { getSolutions } from "./winningStates.js";
 
 const createBoard = (size) => {
@@ -116,3 +117,21 @@ const oneStepBack = (lastCell, player, state, game) => {
     state.pop();
     game.xTurn = !game.xTurn;
   };
+
+export const showRecord = (game, ALERTS) => {  
+    document.querySelector(".show-record").addEventListener("click", () => {
+    const scoresArr = [];
+  
+    for (const score in game.winnings) {
+      scoresArr.push([score, game.winnings[score]]);
+    }
+    if (scoresArr.length > 0) {
+      scoresArr.sort((a, b) => a[1] - b[1]);
+      alert(
+        `The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`
+      );
+    } else {
+      alert(ALERTS.noWin);
+    }
+  });
+};
