@@ -2,12 +2,12 @@ export const game = {
   xTurn: true,
   xState: [],
   oState: [],
-  gamesCounter: 1,
   winnings: {},
   winningStates: [],
 };
 
 export const gameTools = {
+gamesCounter: 1,
 boardSize: "",
 savedGame: { x: [], o: [], xTurn: true },
 };

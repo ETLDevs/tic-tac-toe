@@ -70,3 +70,28 @@ export const gameMoves = (game, gameTools) => {
         }
       });
 };
+
+export const restart = (game, gameTools) => {
+    document.querySelectorAll(".restart").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (document.querySelector(".game-over").classList.contains("visible")) {
+        document.querySelector(".game-over").classList.remove("visible");
+        game.gamesCounter++;
+      }
+      document.querySelectorAll("button").forEach((btn) => {
+        btn.classList.toggle("hidden");
+      });
+  
+      document.querySelectorAll(".grid-cell").forEach((cell) => {
+        cell.classList.remove("disabled", "x", "o");
+      });
+  
+      document.querySelector(".game").classList.add("hidden");
+  
+      game.xTurn = true;
+      game.xState = [];
+      game.oState = [];
+      game.savedGame = {x: [], o: [], xTurn: true };
+    });
+  });
+};
