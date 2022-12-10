@@ -155,3 +155,29 @@ const saveStates = (playerState, savedState) => {
       savedState.push(state);
     });
   };
+
+export const loadGame = (game, gameTools, ALERTS) => {
+     document.querySelector(".load-game").addEventListener("click", () => {
+    const savedStates = gameTools.savedGame;
+    if (savedStates.x.length > 0) {
+      game.xState = [];
+      game.oState = [];
+      game.xState.push(...savedStates.x);
+      game.oState.push(...savedStates.o);
+  
+      document.querySelectorAll(".grid-cell").forEach((cell) => {
+        cell.classList.remove("disabled", "x", "o");
+        const cellValue = cell.dataset.value;
+        if (game.xState.includes(cellValue)) {
+          cell.classList.add("x", "disabled");
+        }
+        if (game.oState.includes(cellValue)) {
+          cell.classList.add("o", "disabled");
+        }
+      });
+      game.xTurn = gameTools.savedGame.xTurn;
+    } else {
+      alert(ALERTS.noSave);
+    }
+  });
+};
