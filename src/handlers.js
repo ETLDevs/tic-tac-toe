@@ -1,4 +1,4 @@
-import { ALERTS } from "./store.js";
+import { ALERTS, gameTools } from "./store.js";
 import { getSolutions } from "./winningStates.js";
 
 const createBoard = (size) => {
@@ -92,7 +92,7 @@ export const restart = (game, gameTools) => {
       game.xTurn = true;
       game.xState = [];
       game.oState = [];
-      game.savedGame = {x: [], o: [], xTurn: true };
+      gameTools.savedGame = {x: [], o: [], xTurn: true };
     });
   });
 };
@@ -135,3 +135,23 @@ export const showRecord = (game, ALERTS) => {
     }
   });
 };
+
+export const saveGame = (game, gameTools, ALERTS) => {
+    document.querySelector(".save-game").addEventListener("click", () => {
+    if (game.xState.length > 0) {
+      gameTools.savedGame = {x: [], o: [], xTurn: true };
+      gameTools.savedGame.xTurn = game.xTurn;
+      saveStates(game.xState, gameTools.savedGame.x);
+      saveStates(game.oState, gameTools.savedGame.o);
+    } 
+    else {
+      alert(ALERTS.emptyBoard);
+    }
+  });
+};
+
+const saveStates = (playerState, savedState) => {
+    playerState.forEach((state) => {
+      savedState.push(state);
+    });
+  };
