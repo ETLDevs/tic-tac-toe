@@ -1,3 +1,5 @@
+import { getSolutions } from "./winningStates.js";
+
 const createBoard = (game, size) => {
     const gameContainer = document.querySelector(".game");
     gameContainer.classList.remove("hidden");
@@ -18,8 +20,8 @@ document.querySelectorAll(".board-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const size = btn.dataset.board;
       createBoard(game, size);
-      game.winningStates = getSolutions(size);
       game.boardSize = size;
+      game.winningStates = getSolutions(size);
       document.querySelectorAll("button").forEach((btn) => {
         btn.classList.toggle("hidden");
       });
