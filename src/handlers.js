@@ -141,20 +141,13 @@ export const saveGame = (game, gameTools, ALERTS) => {
     if (game.xState.length > 0) {
       gameTools.savedGame = { x: [], o: [], xTurn: true };
       gameTools.savedGame.xTurn = game.xTurn;
-      saveStates(game.xState, gameTools.savedGame.x);
-      saveStates(game.oState, gameTools.savedGame.o);
+      gameTools.savedGame.x.push(...game.xState);
+      gameTools.savedGame.o.push(...game.oState);
     } else {
       alert(ALERTS.emptyBoard);
     }
   });
 };
-
-const saveStates = (playerState, savedState) => {
-  playerState.forEach((state) => {
-    savedState.push(state);
-  });
-};
-
 export const loadGame = (game, gameTools, ALERTS) => {
   document.querySelector(".load-game").addEventListener("click", () => {
     const savedStates = gameTools.savedGame;
