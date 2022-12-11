@@ -101,7 +101,7 @@ export const restart = (game, gameTools) => {
   });
 };
 
-export const ReturnOneStep = (game, ALERTS) => {
+export const returnOneStep = (game, ALERTS) => {
   document.querySelector(".return-one-step").addEventListener("click", () => {
     const userLastState = game.xTurn ? game.oState : game.xState;
     const userSymbol = game.xTurn ? "o" : "x";

@@ -3,7 +3,7 @@ import {
   chooseBoard,
   gameMoves,
   restart,
-  ReturnOneStep,
+  returnOneStep,
   showRecord,
   saveGame,
   loadGame,
