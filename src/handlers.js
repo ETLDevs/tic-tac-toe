@@ -167,7 +167,7 @@ export const loadGame = (game, gameTools, ALERTS) => {
           cell.classList.add("o", "disabled");
         }
       });
-      game.xTurn = gameTools.savedGame.xTurn;
+      game.xTurn = savedStates.xTurn;
     } else {
       alert(ALERTS.noSave);
     }
