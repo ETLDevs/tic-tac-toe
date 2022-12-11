@@ -67,8 +67,9 @@ export const gameMoves = (game, gameTools) => {
           document.querySelector(".game-over-text").textContent = xWins
             ? "X wins!"
             : "O wins!";
-          game.winnings[gameTools.gamesCounter] =
-            game.xState.length + game.oState.length;
+          game.winnings.push([
+            gameTools.gamesCounter, 
+            (game.xState.length + game.oState.length)]);
         }
       });
     }
@@ -80,7 +81,7 @@ export const restart = (game, gameTools) => {
     btn.addEventListener("click", () => {
       if (document.querySelector(".game-over").classList.contains("visible")) {
         document.querySelector(".game-over").classList.remove("visible");
-        game.gamesCounter++;
+        gameTools.gamesCounter++;
       }
       document.querySelectorAll("button").forEach((btn) => {
         btn.classList.toggle("hidden");
@@ -95,7 +96,7 @@ export const restart = (game, gameTools) => {
       game.xTurn = true;
       game.xState = [];
       game.oState = [];
-      gameTools.savedGame = { x: [], o: [], xTurn: true };
+      gameTools.savedGame = { x: [], o: [], xTurn: true};
     });
   });
 };
@@ -123,15 +124,11 @@ const oneStepBack = (lastCell, player, state, game) => {
 
 export const showRecord = (game, ALERTS) => {
   document.querySelector(".show-record").addEventListener("click", () => {
-    const scoresArr = [];
-
-    for (const score in game.winnings) {
-      scoresArr.push([score, game.winnings[score]]);
-    }
-    if (scoresArr.length > 0) {
-      scoresArr.sort((a, b) => a[1] - b[1]);
+   const winnings = game.winnings;
+    if (winnings.length > 0) {
+      winnings.sort((a, b) => a[1] - b[1]);
       alert(
-        `The fastest game was game ${scoresArr[0][0]} with ${scoresArr[0][1]} moves`
+        `The fastest game was game ${winnings[0][0]} with ${winnings[0][1]} moves`
       );
     } else {
       alert(ALERTS.noWin);

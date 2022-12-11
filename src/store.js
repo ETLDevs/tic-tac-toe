@@ -2,14 +2,14 @@ export const game = {
   xTurn: true,
   xState: [],
   oState: [],
-  winnings: {},
+  winnings: [],
   winningStates: [],
 };
 
 export const gameTools = {
   gamesCounter: 1,
   boardSize: "",
-  savedGame: { x: [], o: [], xTurn: true },
+  savedGame: { x: [], o: [], xTurn: true},
 };
 
 export const ALERTS = {
