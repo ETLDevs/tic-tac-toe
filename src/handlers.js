@@ -1,4 +1,4 @@
-import { getSolutions } from "./winningStates.js";
+import  { getSolutions }  from "./winningStates.js";
 
 const createBoard = (size) => {
   const gameContainer = document.querySelector(".game");
@@ -10,7 +10,6 @@ const createBoard = (size) => {
     cell.dataset.value = i;
     gameContainer.appendChild(cell);
   }
-  document.documentElement.style.setProperty("--boardSize", size);
 };
 
 export const chooseBoard = (game, gameTools) => {
@@ -20,6 +19,7 @@ export const chooseBoard = (game, gameTools) => {
       createBoard(size);
       gameTools.boardSize = size;
       game.winningStates = getSolutions(size);
+      document.documentElement.style.setProperty("--boardSize", size);
       document.querySelectorAll("button").forEach((btn) => {
         btn.classList.toggle("hidden");
       });
