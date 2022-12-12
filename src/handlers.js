@@ -20,11 +20,24 @@ export const chooseBoard = (game, gameTools) => {
       gameTools.boardSize = size;
       game.winningStates = getSolutions(size);
       document.documentElement.style.setProperty("--boardSize", size);
+      const style = document.createElement("style");
+      style.innerHTML = 
+      `.grid-cell:nth-child(n){
+        border-top: none;
+        border-left: none;
+      }
+      .grid-cell:nth-child(${size}n){
+        border-right: none; 
+      }
+      .grid-cell:nth-last-child(-n +${size}){
+        border-bottom: none;
+      }`
+      document.head.appendChild(style);
       document.querySelectorAll("button").forEach((btn) => {
         btn.classList.toggle("hidden");
       });
       document.querySelector('.chooseGame').classList.add('hidden');
-    });
+      });
   });
 };
 
