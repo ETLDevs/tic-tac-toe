@@ -3,8 +3,8 @@
     --primary: #5f9ea0;
     --primary-variant: #347376;
     --secodary: #deb887;
-    --on-background-1: #f1f1f1;
-    --on-background-2: #036164;
+    --on-primary-1: #f1f1f1;
+    --on-primary-2: #036164;
     --additional: #ffc400;
     
 }
@@ -22,16 +22,22 @@
 justify-content: center;
 align-items: center;
 height: 100vh;
+background-color: var(--primary);
 }
 
 .chooseGame {
-display: flex;
-justify-content: space-evenly;
-align-items: center;
-width: 200px;
-height: 100px;
+display: grid;
+justify-content: center;
+padding: 5px;
+width: 25%;
+height: 20%;
 background-color: var(--secodary);
-border-radius:10px ;
+border-radius:10px;
+color: var(--on-primary-1);
+}
+
+.chooseGameTitle{
+   display: block;
 }
 
 .game {
