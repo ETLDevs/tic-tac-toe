@@ -15,6 +15,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .container {
@@ -29,7 +30,7 @@ background-color: var(--primary);
 display: grid;
 justify-items: center;
 padding: 10px 5px;
-width: 300px;
+width: 250px;
 height: 120px;
 background-color: var(--secodary);
 border-radius:10px;
