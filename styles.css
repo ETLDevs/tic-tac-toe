@@ -34,9 +34,13 @@ header {
   color: var(--on-primary-1);
 }
 
+h1 {
+  font-size: 40px;
+}
+
 hr {
   width: 75vw;
-  border-width: 2px;
+  border-width: 3px;
   border-style: dotted;
   border-bottom: none;
   border-left: none;
@@ -49,12 +53,16 @@ hr {
   display: grid;
   justify-items: center;
   padding: 10px 5px;
-  width: 250px;
-  height: 120px;
+  width: 400px;
+  height: 180px;
   background-color: var(--secodary);
   border-radius: 10px;
   color: var(--on-primary-1);
   box-shadow: rgb(0 0 0 / 50%) 0 0 0 9999px;
+}
+
+h2 {
+  font-size: 35px;
 }
 
 .boardBtnContainer {
@@ -68,8 +76,9 @@ button {
   background-color: var(--primary);
   color: var(--on-primary-1);
   border: none;
-  width: 100px;
-  height: 25px;
+  font-size: 20px;
+  width: 150px;
+  height: 50px;
 }
 
 button:hover {
