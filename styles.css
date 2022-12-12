@@ -85,6 +85,11 @@ button:hover {
   background-color: var(--primary-variant);
 }
 
+.feturesContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .game {
   position: absolute;
   top: 50%;
