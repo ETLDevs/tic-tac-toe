@@ -1,5 +1,12 @@
 :root {
     --boardSize: 3;
+    --primary: #5f9ea0;
+    --primary-variant: #347376;
+    --secodary: #deb887;
+    --on-background-1: #f1f1f1;
+    --on-background-2: #036164;
+    --additional: #ffc400;
+    
 }
 
 .game {
@@ -10,9 +17,7 @@
     display: grid;
     grid-template-columns:repeat(var(--boardSize), auto);
 }
-.game.x5 {
-    grid-template-columns: repeat(5, auto);  
-}
+
 .grid-cell {
     border: 1px solid #000;
     width: 50px;
