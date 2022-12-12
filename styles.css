@@ -27,17 +27,34 @@ background-color: var(--primary);
 
 .chooseGame {
 display: grid;
-justify-content: center;
-padding: 5px;
-width: 25%;
-height: 20%;
+justify-items: center;
+padding: 10px 5px;
+width: 300px;
+height: 120px;
 background-color: var(--secodary);
 border-radius:10px;
 color: var(--on-primary-1);
+box-shadow: rgb(0 0 0 / 50%) 0 0 0 9999px;
 }
 
-.chooseGameTitle{
-   display: block;
+
+.boardBtnContainer {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+button {
+    background-color: var(--primary);
+    color: var(--on-primary-1);
+    border: none;
+    width:100px;
+    height: 25px;
+}
+
+button:hover {
+    background-color: var(--primary-variant);
 }
 
 .game {
