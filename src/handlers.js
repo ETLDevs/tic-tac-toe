@@ -23,6 +23,7 @@ export const chooseBoard = (game, gameTools) => {
       document.querySelectorAll("button").forEach((btn) => {
         btn.classList.toggle("hidden");
       });
+      document.querySelector('.chooseGame').classList.add('hidden');
     });
   });
 };
