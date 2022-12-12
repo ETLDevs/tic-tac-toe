@@ -119,11 +119,15 @@ button:hover {
 }
 
 .x::after {
-  content: "❌";
+  content: "X";
+color: var(--on-primary-1);
+font-size: 75px;
 }
 
 .o::after {
-  content: "⭕";
+  content: "O";
+  color: var(--on-primary-2);
+  font-size: 80px;
 }
 
 .game-over {
