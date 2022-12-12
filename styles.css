@@ -9,6 +9,31 @@
     
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+    display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+.chooseGame {
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+width: 200px;
+height: 100px;
+background-color: var(--secodary);
+border-radius:10px ;
+}
+
 .game {
     position: absolute;
     top: 50%;
