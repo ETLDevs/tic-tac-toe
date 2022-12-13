@@ -2,6 +2,7 @@ import { game, gameTools, ALERTS } from "./store.js";
 import {
   chooseBoard,
   gameMoves,
+  newGame,
   restart,
   returnOneStep,
   showRecord,
@@ -11,6 +12,7 @@ import {
 
 chooseBoard(game, gameTools);
 gameMoves(game, gameTools);
+newGame(game, gameTools)
 restart(game, gameTools);
 returnOneStep(game, ALERTS);
 showRecord(game, ALERTS);

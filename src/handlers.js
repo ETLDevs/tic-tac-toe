@@ -1,3 +1,4 @@
+import { gameTools } from "./store.js";
 import  { getSolutions }  from "./winningStates.js";
 
 const createBoard = (size) => {
@@ -9,6 +10,19 @@ const createBoard = (size) => {
     cell.dataset.value = i;
     gameContainer.appendChild(cell);
   }
+  const style = document.querySelector(".gridStyle");
+  style.innerHTML = 
+  `.grid-cell:nth-child(n){
+    border-top: none;
+    border-left: none;
+  }
+  .grid-cell:nth-child(${size}n){
+    border-right: none; 
+  }
+  .grid-cell:nth-last-child(-n +${size}){
+    border-bottom: none;
+  }`
+  document.head.appendChild(style);
 };
 
 export const chooseBoard = (game, gameTools) => {
@@ -19,19 +33,6 @@ export const chooseBoard = (game, gameTools) => {
       gameTools.boardSize = size;
       game.winningStates = getSolutions(size);
       document.documentElement.style.setProperty("--boardSize", size);
-      const style = document.querySelector(".gridStyle");
-      style.innerHTML = 
-      `.grid-cell:nth-child(n){
-        border-top: none;
-        border-left: none;
-      }
-      .grid-cell:nth-child(${size}n){
-        border-right: none; 
-      }
-      .grid-cell:nth-last-child(-n +${size}){
-        border-bottom: none;
-      }`
-      document.head.appendChild(style);
       document.querySelectorAll(".new").forEach(el => {
         el.classList.toggle("hidden");
       });
@@ -101,6 +102,18 @@ export const gameMoves = (game, gameTools) => {
     }
   });
 };
+
+export const newGame = (game, gameTools) => {
+  document.querySelector('.newGame').addEventListener('click', () => {
+    document.querySelector('.game-over').classList.add('hidden');
+    document.querySelector('.game').innerHTML = '';
+    createBoard(gameTools.boardSize)
+    game.xState = [];
+    game.oState = [];
+    game.xTurn = true; 
+  });
+}
+
 
 export const restart = (game, gameTools) => {
   document.querySelectorAll(".restart").forEach((btn) => {
