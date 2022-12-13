@@ -80,14 +80,24 @@ export const gameMoves = (game, gameTools) => {
             .querySelectorAll(".grid-cell")
             .forEach((cell) => cell.classList.add("disabled"));
           document.querySelector(".game-over").classList.remove("hidden");
-          document.querySelector(".game-over-text").textContent = xWins
-            ? "X wins!"
-            : "O wins!";
+          if (xWins) {
+              document.querySelector(".game-over-text").textContent =  "X wins!";
+            game.xWins++
+            }
+            else{
+              document.querySelector(".game-over-text").textContent =  "O wins!";
+              game.oWins++
+            };
+            document.querySelectorAll('.wins').forEach(win => {
+              (win.classList.contains('x')) ?
+              win.innerHTML = game.xWins:
+              win.innerHTML = game.oWins;
+            });
+      };
           game.winnings.push([
             gameTools.gamesCounter, 
             (game.xState.length + game.oState.length)]);
-        }
-      });
+        });
     }
   });
 };
@@ -106,12 +116,16 @@ export const restart = (game, gameTools) => {
       document.querySelectorAll(".grid-cell").forEach((cell) => {
         cell.classList.remove("disabled", "x", "o");
       });
-
+      document.querySelectorAll('.wins').forEach(win => {
+      win.innerHTML = "0";
+      });
       document.head.querySelector('.gridStyle').innerHTML = '';
 
       game.xTurn = true;
       game.xState = [];
       game.oState = [];
+      game.xWins = 0;
+      game.oWins = 0;
       gameTools.savedGame = { x: [], o: [], xTurn: true};
     });
   });
