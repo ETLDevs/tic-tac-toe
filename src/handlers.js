@@ -53,11 +53,11 @@ export const gameMoves = (game, gameTools) => {
 
     if (game.xTurn === true){
         game.xState.push(cellValue);
-        document.querySelector('.dot').style.left = 'inherit';
+        document.querySelector('.dot').style.right = 'inherit';
       }
       else{
         game.oState.push(cellValue);
-        document.querySelector('.dot').style.left = '320px';
+        document.querySelector('.dot').style.right = '135px';
       }
       target.classList.add("disabled");
       target.classList.add(game.xTurn ? "x" : "o");
