@@ -12,7 +12,7 @@ import {
 chooseBoard(game, gameTools);
 gameMoves(game, gameTools);
 restart(game, gameTools);
-ReturnOneStep(game, ALERTS);
+returnOneStep(game, ALERTS);
 showRecord(game, ALERTS);
 saveGame(game, gameTools, ALERTS);
 loadGame(game, gameTools, ALERTS);
