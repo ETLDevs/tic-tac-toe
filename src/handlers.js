@@ -63,7 +63,7 @@ export const gameMoves = (game, gameTools) => {
 
       // If all cells are disabled, then its draw
       if (!document.querySelectorAll(".grid-cell:not(.disabled)").length) {
-        document.querySelector(".game-over").classList.add("visible");
+        document.querySelector(".game-over").classList.remove("hidden");
         document.querySelector(".game-over-text").textContent = "Draw!";
       }
 
