@@ -2,7 +2,6 @@ import  { getSolutions }  from "./winningStates.js";
 
 const createBoard = (size) => {
   const gameContainer = document.querySelector(".game");
-  gameContainer.classList.remove("hidden");
   gameContainer.innerHTML = "";
   for (let i = 0; i < size ** 2; i++) {
     const cell = document.createElement("div");
@@ -20,7 +19,7 @@ export const chooseBoard = (game, gameTools) => {
       gameTools.boardSize = size;
       game.winningStates = getSolutions(size);
       document.documentElement.style.setProperty("--boardSize", size);
-      const style = document.createElement("style");
+      const style = document.querySelector(".gridStyle");
       style.innerHTML = 
       `.grid-cell:nth-child(n){
         border-top: none;
@@ -33,11 +32,9 @@ export const chooseBoard = (game, gameTools) => {
         border-bottom: none;
       }`
       document.head.appendChild(style);
-      document.querySelectorAll("button").forEach((btn) => {
-        btn.classList.toggle("hidden");
+      document.querySelectorAll(".new").forEach(el => {
+        el.classList.toggle("hidden");
       });
-      document.querySelector('.chooseGame').classList.add('hidden');
-      document.querySelector('.winCounter').classList.remove('hidden')
       });
   });
 };
@@ -98,19 +95,19 @@ export const gameMoves = (game, gameTools) => {
 export const restart = (game, gameTools) => {
   document.querySelectorAll(".restart").forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (document.querySelector(".game-over").classList.contains("visible")) {
-        document.querySelector(".game-over").classList.remove("visible");
+      if (!document.querySelector(".game-over").classList.contains("hidden")) {
+        document.querySelector(".game-over").classList.add("hidden");
         gameTools.gamesCounter++;
       }
-      document.querySelectorAll("button").forEach((btn) => {
-        btn.classList.toggle("hidden");
+      document.querySelectorAll(".new").forEach(el => {
+        el.classList.toggle("hidden");
       });
 
       document.querySelectorAll(".grid-cell").forEach((cell) => {
         cell.classList.remove("disabled", "x", "o");
       });
 
-      document.querySelector(".game").classList.add("hidden");
+      document.head.querySelector('.gridStyle').innerHTML = '';
 
       game.xTurn = true;
       game.xState = [];

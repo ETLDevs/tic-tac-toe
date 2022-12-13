@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <style class="gridStyle"></style>
     <script src="src/main.js" defer type="module"></script>
     <title>❌⭕ Tic-Tac-Toe</title>
   </head>
@@ -20,43 +21,43 @@
         <h1>TIC TAC TOE</h1>
         <hr />
       </header>
-      <div class="chooseGame">
+      <div class="chooseGame new">
         <h2 class="chooseGameTitle">Choose Game</h2>
         <div class="boardBtnContainer">
           <button class="board-btn" data-board="3">3X3 Board</button>
           <button class="board-btn" data-board="5">5X5 Board</button>
         </div>
       </div>
-      <div class="featuresContainer">
+      <div class="featuresContainer hidden new">
       <button
-        class="feature restart hidden"
+        class="feature restart"
         title="If you'll restart your saved game will be erased"
       >
         Restart
       </button>
-      <button class="feature return-one-step hidden">Return One Step</button>
-      <button class="feature show-record hidden">Show Record</button>
+      <button class="feature return-one-step">Return One Step</button>
+      <button class="feature show-record">Show Record</button>
       <button
-        class="feature save-game hidden"
+        class="feature save-game"
         title="You can't save more than one game"
       >
         Save Game
       </button>
-      <button class="feature load-game hidden">Load Game</button>
+      <button class="feature load-game">Load Game</button>
     </div>
-    <div class="winCounter hidden">
+    <div class="winCounter hidden new">
       <span class="xWins">0</span> : <span class="yWins">0</span>
       <i class="dot">.</i>
     </div>  
-    <div class="game">
+    <div class="game hidden new">
        
       </div>
 
       <div class="game-over hidden">
         <span class="game-over-text"></span>
         <div class="gameOverBtn">
-        <button class="newGame hidden">New Game</button>
-        <button class="restart hidden">Restart</button>
+        <button class="newGame">New Game</button>
+        <button class="restart">Restart</button>
       </div>
       </div>
     </div>

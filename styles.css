@@ -164,10 +164,6 @@ font-size: 75px;
   font-weight: bold;
 }
 
-.visible {
-  display: block;
-}
-
 .hidden {
   display: none;
 }
