@@ -107,6 +107,7 @@ export const newGame = (game, gameTools) => {
     document.querySelector('.game-over').classList.add('hidden');
     document.querySelector('.game').innerHTML = '';
     createBoard(gameTools.boardSize);
+    document.querySelector('.dot').style.right = '135px';
     game.xState = [];
     game.oState = [];
     game.xTurn = true; 
@@ -132,7 +133,7 @@ export const restart = (game, gameTools) => {
       win.innerHTML = "0";
       });
       document.head.querySelector('.gridStyle').innerHTML = '';
-
+      document.querySelector('.dot').style.right = '135px';
       game.xTurn = true;
       game.xState = [];
       game.oState = [];

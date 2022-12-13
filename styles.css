@@ -103,6 +103,7 @@ button:hover {
   bottom: 40px;
   color: var(--additional);
   font-style: normal;
+  font-size: 60px;
 }
 
 .game {
