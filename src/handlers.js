@@ -45,7 +45,7 @@ export const gameMoves = (game, gameTools) => {
     const target = event.target;
     const isCell = target.classList.contains("grid-cell");
     const isDisabled = target.classList.contains("disabled");
-
+    
     if (isCell && !isDisabled) {
       const cellValue = target.dataset.value;
 
@@ -66,8 +66,7 @@ export const gameMoves = (game, gameTools) => {
       if (!document.querySelectorAll(".grid-cell:not(.disabled)").length) {
         document.querySelector(".game-over").classList.remove("hidden");
         document.querySelector(".game-over-text").textContent = "Draw!";
-      }
-
+      };
       game.winningStates.forEach((winningState) => {
         const xWins = winningState.every((state) =>
           game.xState.includes(state)
@@ -94,12 +93,12 @@ export const gameMoves = (game, gameTools) => {
               win.innerHTML = game.xWins:
               win.innerHTML = game.oWins;
             });
+            game.winnings.push([
+              gameTools.gamesCounter, 
+              (game.xState.length + game.oState.length)]);
       };
-          game.winnings.push([
-            gameTools.gamesCounter, 
-            (game.xState.length + game.oState.length)]);
-        });
-    }
+          });
+        }
   });
 };
 
@@ -107,10 +106,11 @@ export const newGame = (game, gameTools) => {
   document.querySelector('.newGame').addEventListener('click', () => {
     document.querySelector('.game-over').classList.add('hidden');
     document.querySelector('.game').innerHTML = '';
-    createBoard(gameTools.boardSize)
+    createBoard(gameTools.boardSize);
     game.xState = [];
     game.oState = [];
     game.xTurn = true; 
+    gameTools.gamesCounter++
   });
 }
 
@@ -120,7 +120,6 @@ export const restart = (game, gameTools) => {
     btn.addEventListener("click", () => {
       if (!document.querySelector(".game-over").classList.contains("hidden")) {
         document.querySelector(".game-over").classList.add("hidden");
-        gameTools.gamesCounter++;
       }
       document.querySelectorAll(".new").forEach(el => {
         el.classList.toggle("hidden");
@@ -140,6 +139,7 @@ export const restart = (game, gameTools) => {
       game.xWins = 0;
       game.oWins = 0;
       gameTools.savedGame = { x: [], o: [], xTurn: true};
+      gameTools.gamesCounter = 1;
     });
   });
 };
