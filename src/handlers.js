@@ -37,6 +37,7 @@ export const chooseBoard = (game, gameTools) => {
         btn.classList.toggle("hidden");
       });
       document.querySelector('.chooseGame').classList.add('hidden');
+      document.querySelector('.winCounter').classList.remove('hidden')
       });
   });
 };
@@ -50,10 +51,14 @@ export const gameMoves = (game, gameTools) => {
     if (isCell && !isDisabled) {
       const cellValue = target.dataset.value;
 
-      game.xTurn === true
-        ? game.xState.push(cellValue)
-        : game.oState.push(cellValue);
-
+    if (game.xTurn === true){
+        game.xState.push(cellValue);
+        document.querySelector('.dot').style.left = 'inherit';
+      }
+      else{
+        game.oState.push(cellValue);
+        document.querySelector('.dot').style.left = '320px';
+      }
       target.classList.add("disabled");
       target.classList.add(game.xTurn ? "x" : "o");
 
