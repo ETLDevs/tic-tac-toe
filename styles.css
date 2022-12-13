@@ -145,22 +145,23 @@ font-size: 75px;
 }
 
 .game-over {
-  display: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 45vh;
+  width: 400px;
+  height: 180px;
+  border-radius: 10px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--secodary);
+  color: var(--on-primary-1);
   box-shadow: rgb(0 0 0 / 50%) 0 0 0 9999px;
 }
 
 .game-over-text {
-  position: absolute;
-  top: -200px;
   font-size: 60px;
-  font-family: sans-serif;
   font-weight: bold;
-  text-align: center;
-  transform: translateX(-30%);
 }
 
 .visible {

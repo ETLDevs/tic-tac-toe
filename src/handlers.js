@@ -82,7 +82,7 @@ export const gameMoves = (game, gameTools) => {
           document
             .querySelectorAll(".grid-cell")
             .forEach((cell) => cell.classList.add("disabled"));
-          document.querySelector(".game-over").classList.add("visible");
+          document.querySelector(".game-over").classList.remove("hidden");
           document.querySelector(".game-over-text").textContent = xWins
             ? "X wins!"
             : "O wins!";
