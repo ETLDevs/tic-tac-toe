@@ -6,27 +6,27 @@ const createBoard = (size) => {
   gameContainer.innerHTML = "";
   for (let i = 0; i < size ** 2; i++) {
     const cell = document.createElement("div");
-    cell.classList.add(`grid-cell`);
+    cell.classList.add(`gridCell`);
     cell.dataset.value = i;
     gameContainer.appendChild(cell);
   }
   const style = document.querySelector(".gridStyle");
   style.innerHTML = 
-  `.grid-cell:nth-child(n){
+  `.gridCell:nth-child(n){
     border-top: none;
     border-left: none;
   }
-  .grid-cell:nth-child(${size}n){
+  .gridCell:nth-child(${size}n){
     border-right: none; 
   }
-  .grid-cell:nth-last-child(-n +${size}){
+  .gridCell:nth-last-child(-n +${size}){
     border-bottom: none;
   }`
   document.head.appendChild(style);
 };
 
 export const chooseBoard = (game, gameTools) => {
-  document.querySelectorAll(".board-btn").forEach((btn) => {
+  document.querySelectorAll(".boardBtn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const size = btn.dataset.board;
       createBoard(size);
@@ -43,7 +43,7 @@ export const chooseBoard = (game, gameTools) => {
 export const gameMoves = (game, gameTools) => {
   document.addEventListener("click", (event) => {
     const target = event.target;
-    const isCell = target.classList.contains("grid-cell");
+    const isCell = target.classList.contains("gridCell");
     const isDisabled = target.classList.contains("disabled");
     
     if (isCell && !isDisabled) {
@@ -63,9 +63,9 @@ export const gameMoves = (game, gameTools) => {
       game.xTurn = !game.xTurn;
 
       // If all cells are disabled, then its draw
-      if (!document.querySelectorAll(".grid-cell:not(.disabled)").length) {
-        document.querySelector(".game-over").classList.remove("hidden");
-        document.querySelector(".game-over-text").textContent = "Draw!";
+      if (!document.querySelectorAll(".gridCell:not(.disabled)").length) {
+        document.querySelector(".gameOver").classList.remove("hidden");
+        document.querySelector(".gameOverText").textContent = "Draw!";
       };
       game.winningStates.forEach((winningState) => {
         const xWins = winningState.every((state) =>
@@ -77,15 +77,15 @@ export const gameMoves = (game, gameTools) => {
 
         if (xWins || oWins) {
           document
-            .querySelectorAll(".grid-cell")
+            .querySelectorAll(".gridCell")
             .forEach((cell) => cell.classList.add("disabled"));
-          document.querySelector(".game-over").classList.remove("hidden");
+          document.querySelector(".gameOver").classList.remove("hidden");
           if (xWins) {
-              document.querySelector(".game-over-text").textContent =  "X wins!";
+              document.querySelector(".gameOverText").textContent =  "X wins!";
             game.xWins++
             }
             else{
-              document.querySelector(".game-over-text").textContent =  "O wins!";
+              document.querySelector(".gameOverText").textContent =  "O wins!";
               game.oWins++
             };
             document.querySelectorAll('.wins').forEach(win => {
@@ -104,7 +104,7 @@ export const gameMoves = (game, gameTools) => {
 
 export const newGame = (game, gameTools) => {
   document.querySelector('.newGame').addEventListener('click', () => {
-    document.querySelector('.game-over').classList.add('hidden');
+    document.querySelector('.gameOver').classList.add('hidden');
     document.querySelector('.game').innerHTML = '';
     createBoard(gameTools.boardSize);
     document.querySelector('.dot').style.right = '135px';
@@ -119,14 +119,14 @@ export const newGame = (game, gameTools) => {
 export const restart = (game, gameTools) => {
   document.querySelectorAll(".restart").forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (!document.querySelector(".game-over").classList.contains("hidden")) {
-        document.querySelector(".game-over").classList.add("hidden");
+      if (!document.querySelector(".gameOver").classList.contains("hidden")) {
+        document.querySelector(".gameOver").classList.add("hidden");
       }
       document.querySelectorAll(".new").forEach(el => {
         el.classList.toggle("hidden");
       });
 
-      document.querySelectorAll(".grid-cell").forEach((cell) => {
+      document.querySelectorAll(".gridCell").forEach((cell) => {
         cell.classList.remove("disabled", "x", "o");
       });
       document.querySelectorAll('.wins').forEach(win => {
@@ -146,7 +146,7 @@ export const restart = (game, gameTools) => {
 };
 
 export const returnOneStep = (game, ALERTS) => {
-  document.querySelector(".return-one-step").addEventListener("click", () => {
+  document.querySelector(".returnOneStep").addEventListener("click", () => {
     const userLastState = game.xTurn ? game.oState : game.xState;
     const userSymbol = game.xTurn ? "o" : "x";
     const lastCell = document.querySelector(
@@ -167,7 +167,7 @@ const oneStepBack = (lastCell, player, state, game) => {
 };
 
 export const showRecord = (game, ALERTS) => {
-  document.querySelector(".show-record").addEventListener("click", () => {
+  document.querySelector(".showRecord").addEventListener("click", () => {
    const winnings = game.winnings;
     if (winnings.length > 0) {
       winnings.sort((a, b) => a[1] - b[1]);
@@ -181,7 +181,7 @@ export const showRecord = (game, ALERTS) => {
 };
 
 export const saveGame = (game, gameTools, ALERTS) => {
-  document.querySelector(".save-game").addEventListener("click", () => {
+  document.querySelector(".saveGame").addEventListener("click", () => {
     if (game.xState.length > 0) {
       gameTools.savedGame = { x: [], o: [], xTurn: true };
       gameTools.savedGame.xTurn = game.xTurn;
@@ -193,7 +193,7 @@ export const saveGame = (game, gameTools, ALERTS) => {
   });
 };
 export const loadGame = (game, gameTools, ALERTS) => {
-  document.querySelector(".load-game").addEventListener("click", () => {
+  document.querySelector(".loadGame").addEventListener("click", () => {
     const savedStates = gameTools.savedGame;
     if (savedStates.x.length > 0) {
       game.xState = [];
@@ -201,7 +201,7 @@ export const loadGame = (game, gameTools, ALERTS) => {
       game.xState.push(...savedStates.x);
       game.oState.push(...savedStates.o);
 
-      document.querySelectorAll(".grid-cell").forEach((cell) => {
+      document.querySelectorAll(".gridCell").forEach((cell) => {
         cell.classList.remove("disabled", "x", "o");
         const cellValue = cell.dataset.value;
         if (game.xState.includes(cellValue)) {
