@@ -3,6 +3,8 @@ export const game = {
   xState: [],
   oState: [],
   winnings: [],
+  xWins: 0,
+  oWins: 0,
   winningStates: [],
 };
 

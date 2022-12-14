@@ -1,31 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="styles.css" />
-        <!-- <script src="game.js" defer type="module"></script> -->
-        <script src="src/main.js" defer type="module"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style class="gridStyle"></style>
+    <script src="src/main.js" defer type="module"></script>
+    <title>❌⭕ Tic-Tac-Toe</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>TIC TAC TOE</h1>
+        <hr />
+      </header>
+      <div class="chooseGame new">
+        <h2 class="chooseGameTitle">Choose Game</h2>
+        <div class="boardBtnContainer">
+          <button class="boardBtn" data-board="3">3X3 Board</button>
+          <button class="boardBtn" data-board="5">5X5 Board</button>
+        </div>
+      </div>
+      <div class="featuresContainer hidden new">
+      <button
+        class="feature restart"
+        title="If you'll restart your saved game will be erased"
+      >
+        Restart
+      </button>
+      <button class="feature returnOneStep">Return One Step</button>
+      <button class="feature showRecord">Show Record</button>
+      <button
+        class="feature saveGame"
+        title="You can't save more than one game"
+      >
+        Save Game
+      </button>
+      <button class="feature loadGame">Load Game</button>
+    </div>
+    <div class="winCounter hidden new">
+      <span class="x wins">0</span> : <span class="o wins">0</span>
+      <i class="dot">.</i>
+    </div>  
+    <div class="game hidden new">
+       
+      </div>
 
-        <title>❌⭕ Tic-Tac-Toe</title>
-    </head>
-    <body>
-        <button class="board-btn" data-board = "3">3X3 Board</button>
-        <button class="board-btn" data-board = "5">5X5 Board</button>
-        <button class="feature restart hidden" title = "If you'll restart your saved game will be erased">Restart</button>
-        <button class="feature return-one-step hidden">Return One Step</button>
-        <button class="feature show-record hidden">Show Record</button>
-        <button class="feature save-game hidden" title = "You can't save more than one game">Save Game</button>
-        <button class="feature load-game hidden">Load Game</button>
-        
-        <div class="game">
-            
-        </div>
-        
-        <div class="game-over">
-            <span class="game-over-text"></span>
-            <button class="restart hidden">Restart</button>
-        </div>
-    </body>
+      <div class="gameOver hidden">
+        <span class="gameOverText"></span>
+        <div class="gameOverBtn">
+        <button class="newGame">New Game</button>
+        <button class="restart">Restart</button>
+      </div>
+      </div>
+    </div>
+  </body>
 </html>
